@@ -5,10 +5,6 @@
  */
 package view;
 
-import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
-
-
 /**
  *
  * @author danie
@@ -31,99 +27,108 @@ public class TelaLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtLogin = new javax.swing.JLabel();
-        txtSenha = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         campoUsuario = new javax.swing.JTextField();
-        btnEntrar = new javax.swing.JButton();
         campoSenha = new javax.swing.JPasswordField();
-        fundo = new javax.swing.JLabel();
+        btnEntrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login");
-        setResizable(false);
-        getContentPane().setLayout(null);
 
-        txtLogin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtLogin.setForeground(new java.awt.Color(69, 69, 130));
-        txtLogin.setText("Login");
-        getContentPane().add(txtLogin);
-        txtLogin.setBounds(200, 170, 50, 30);
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        txtSenha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtSenha.setForeground(new java.awt.Color(69, 69, 130));
-        txtSenha.setText("Senha");
-        getContentPane().add(txtSenha);
-        txtSenha.setBounds(200, 240, 50, 30);
+        jLabel1.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
+        jLabel1.setText("MedSystem");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Login");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Senha");
 
         campoUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        campoUsuario.addActionListener(new java.awt.event.ActionListener() {
+
+        campoSenha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        campoSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoUsuarioActionPerformed(evt);
+                campoSenhaActionPerformed(evt);
             }
         });
-        getContentPane().add(campoUsuario);
-        campoUsuario.setBounds(200, 200, 180, 28);
 
         btnEntrar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnEntrar.setForeground(new java.awt.Color(69, 69, 130));
         btnEntrar.setText("Entrar");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEntrar);
-        btnEntrar.setBounds(250, 330, 79, 31);
 
-        campoSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoSenhaActionPerformed(evt);
-            }
-        });
-        campoSenha.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                campoSenhaKeyPressed(evt);
-            }
-        });
-        getContentPane().add(campoSenha);
-        campoSenha.setBounds(200, 270, 180, 30);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(44, 44, 44)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(193, 193, 193))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(campoUsuario)
+                            .addComponent(campoSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(237, 237, 237)
+                .addComponent(btnEntrar)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(campoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(62, 62, 62)
+                .addComponent(btnEntrar)
+                .addContainerGap(72, Short.MAX_VALUE))
+        );
 
-        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundoLogin.png"))); // NOI18N
-        getContentPane().add(fundo);
-        fundo.setBounds(0, 0, 587, 450);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
-        setSize(new java.awt.Dimension(587, 470));
-        setLocationRelativeTo(null);
+        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void campoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoUsuarioActionPerformed
-
-    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if(campoUsuario.getText().equals("Daniele")&&campoSenha.getText().equals("1234")) {
-            TelaUsuario telaUsuario = new TelaUsuario();
-                telaUsuario.setVisible(true);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Acesso negado!");
-        }
-    }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void campoSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoSenhaActionPerformed
 
-    private void campoSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoSenhaKeyPressed
-        if(evt.getKeyCode() ==KeyEvent.VK_ENTER)    
-            if(campoUsuario.getText().equals("Daniele")&&campoSenha.getText().equals("1234")) {
-                TelaUsuario telaUsuario = new TelaUsuario();
-                    telaUsuario.setVisible(true);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Acesso negado!");
-            }
-    }//GEN-LAST:event_campoSenhaKeyPressed
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,7 +141,7 @@ public class TelaLogin extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -164,8 +169,9 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JButton btnEntrar;
     private javax.swing.JPasswordField campoSenha;
     private javax.swing.JTextField campoUsuario;
-    private javax.swing.JLabel fundo;
-    private javax.swing.JLabel txtLogin;
-    private javax.swing.JLabel txtSenha;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

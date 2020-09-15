@@ -1,30 +1,18 @@
 package model;
 
-public class Medico {
+public class Medico extends Usuario {
     Medico(){
-        this.id = Medico.getNum_medicos();
+        this.id = 0;
         this.especialidade = "";
         this.nome = "";
         this.CRM = "";
     }
     
     private int id;
-    private static int num_medicos = 0;
+    private int num_medicos = 0;
     private String especialidade;
     private String nome;
     private String CRM;
-
-    public static int getNum_medicos() {
-        return num_medicos;
-    }
-
-    public static void incNum_medicos() {
-        Medico.num_medicos += 1;
-    }
-    
-    public static void decNum_medicos() {
-        Medico.num_medicos -= 1;
-    }
     
     public int getId() {
         return id;

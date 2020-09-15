@@ -2,23 +2,22 @@ package model;
 
 import java.util.Calendar;
 
-
-public class Paciente {
+public class Paciente extends Usuario {
     Paciente(){
-        this.id = Paciente.getNumPacientes();
+        this.id = 0;
         this.nome = "";
         this.data_nasc = null;
         this.CPF = "";
-        this.endereco = "";
+        this.endereco = null;
         this.telefone = "";
     }
     
-    private static int num_pacientes = 0;
+    private int num_pacientes = 0;
     private int id;
-    private String nome;
+    private String nome, sexo;
     private Calendar data_nasc;
     private String CPF;
-    private String endereco;
+    private Endereco endereco;
     private String telefone;
     
     public int getId() {
@@ -27,18 +26,6 @@ public class Paciente {
 
     public void setId(int id) {
         this.id = id;
-    }
-    
-    public static int getNumPacientes() {
-        return Paciente.num_pacientes;
-    }
-
-    public static void incNumPacientes() {
-        Paciente.num_pacientes += 1;
-    }
-
-    public static void decNumPacientes() {
-        Paciente.num_pacientes -= 1;
     }
     
     
@@ -66,13 +53,6 @@ public class Paciente {
         this.CPF = CPF;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
 
     public String getTelefone() {
         return telefone;
@@ -80,5 +60,21 @@ public class Paciente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
