@@ -8,7 +8,6 @@ abstract public class Usuario {
     }
     
     private int id;
-    private int numUsuario = 0;
     private String username;
     private String password;
 

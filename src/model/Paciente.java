@@ -12,7 +12,6 @@ public class Paciente extends Usuario {
         this.telefone = "";
     }
     
-    private int num_pacientes = 0;
     private int id;
     private String nome, sexo;
     private Calendar data_nasc;

@@ -9,7 +9,6 @@ public class Medico extends Usuario {
     }
     
     private int id;
-    private int num_medicos = 0;
     private String especialidade;
     private String nome;
     private String CRM;
