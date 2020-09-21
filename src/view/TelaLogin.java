@@ -190,7 +190,15 @@ public class TelaLogin extends javax.swing.JFrame {
                 MainAtendente telaAtend = new MainAtendente();
                 telaAtend.setVisible(true);
                 dispose();
-            } 
+            } else if (campoUsuario.getText().equals("paciente")&&campoSenha.getText().equals("1234")) {
+                MainPaciente telaPaciente = new MainPaciente();
+                          telaPaciente.setVisible(true);
+                dispose();
+            } else if (campoUsuario.getText().equals("medico")&&campoSenha.getText().equals("1234")) {
+                MainMedico telaMed = new MainMedico();
+                          telaMed.setVisible(true);
+                dispose();
+        }
         }
     }//GEN-LAST:event_campoSenhaKeyPressed
 
