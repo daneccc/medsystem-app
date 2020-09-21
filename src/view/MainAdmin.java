@@ -81,6 +81,8 @@ public class MainAdmin extends javax.swing.JFrame {
             }
         });
 
+        campoBuscarConsulta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         btnEditarConsulta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEditarConsulta.setText("Editar consulta");
         btnEditarConsulta.addActionListener(new java.awt.event.ActionListener() {

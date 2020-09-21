@@ -84,6 +84,8 @@ public class ListarAtendentes extends javax.swing.JFrame {
             }
         });
 
+        campoPesquisarAtendente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Design sem nome (1).png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

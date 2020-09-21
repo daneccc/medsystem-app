@@ -86,6 +86,8 @@ public class MainAtendente extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Digite o código da consulta");
 
+        campoBuscarConsulta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         jButtonNovoPaciente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonNovoPaciente.setText("Cadastrar Paciente");
         jButtonNovoPaciente.setToolTipText("Cadastrar novo paciente");
