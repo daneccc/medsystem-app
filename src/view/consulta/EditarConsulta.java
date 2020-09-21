@@ -157,7 +157,8 @@ public class EditarConsulta extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(679, 338));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
