@@ -6,6 +6,7 @@
 package view;
 
 import view.cadastrar.NovoPaciente;
+import view.consulta.EditarConsulta;
 import view.consulta.NovaConsulta;
 
 /**
@@ -73,6 +74,11 @@ public class MainAtendente extends javax.swing.JFrame {
         btnPesquisar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnPesquisar.setText("Pacientes");
         btnPesquisar.setToolTipText("Listar pacientes");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Agendar consulta");
@@ -99,10 +105,20 @@ public class MainAtendente extends javax.swing.JFrame {
 
         btnEditarConsulta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEditarConsulta.setText("Editar consulta");
+        btnEditarConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarConsultaActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton2.setText("Médicos");
         jButton2.setToolTipText("Listar médicos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -183,8 +199,23 @@ public class MainAtendente extends javax.swing.JFrame {
     private void jButtonNovoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoPacienteActionPerformed
         NovoPaciente cadPaciente = new NovoPaciente();
         cadPaciente.setVisible(true);
-        dispose();
+        
     }//GEN-LAST:event_jButtonNovoPacienteActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        ListarPacientes listarPacientes = new ListarPacientes();
+        listarPacientes.setVisible(true);
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ListarMedicos listarMedicos = new ListarMedicos();
+        listarMedicos.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnEditarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarConsultaActionPerformed
+        EditarConsulta editarConsulta = new EditarConsulta();
+        editarConsulta.setVisible(true);
+    }//GEN-LAST:event_btnEditarConsultaActionPerformed
 
     /**
      * @param args the command line arguments
