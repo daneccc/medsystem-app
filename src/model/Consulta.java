@@ -2,13 +2,7 @@ package model;
 import java.sql.Time;
 import java.util.Date;
 
-public class Consulta {
-    Consulta(){
-        this.paciente = new Paciente();
-        this.medico = new Medico();
-        this.data = null;
-    }
-    
+public class Consulta {  
     private int id;
     private int numConsulta;
     private Paciente paciente;

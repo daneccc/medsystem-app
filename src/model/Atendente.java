@@ -1,8 +1,7 @@
 package model;
 
-public class Atendente {
-    
-    private String nome;
-    private String cpf, rg, nasc, contato;
-    
+public class Atendente extends Funcionario {
+    Atendente(){
+        super();
+    }
 }

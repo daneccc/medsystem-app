@@ -6,5 +6,15 @@ public class PacienteControl {
         
     }
     
-    
+    static void AlterarPaciente(Paciente p){
+        
+    }
+
+    static void PesquisarPaciente(Paciente p){
+        
+    }
+ 
+    static void DeletarPaciente(Paciente p){
+        
+    }
 }

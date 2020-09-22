@@ -1,34 +1,12 @@
 package model;
 
-public class Medico extends Usuario {
+public class Medico extends Funcionario {
     Medico(){
-        this.id = 0;
-        this.nome = "";
-        this.CRM = "";
+        super();
     }
-    
-    private int id;
-    private String nome;
-    private String cpf, rg, nasc, contato;
+
     private String CRM;
-    private String endereco;
-    private int sexo; 
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    private Agenda agendaDeTrabalho;
 
     public String getCRM() {
         return CRM;
@@ -36,5 +14,13 @@ public class Medico extends Usuario {
 
     public void setCRM(String CRM) {
         this.CRM = CRM;
+    }
+
+    public Agenda getAgendaDeTrabalho() {
+        return agendaDeTrabalho;
+    }
+
+    public void setAgendaDeTrabalho(Agenda agendaDeTrabalho) {
+        this.agendaDeTrabalho = agendaDeTrabalho;
     }
 }

@@ -1,8 +1,7 @@
 package model;
 
-public class Administrador extends Atendente {
+public class Administrador extends Funcionario {
     Administrador(){
         super();
     }
-    
 }
