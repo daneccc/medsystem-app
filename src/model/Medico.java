@@ -3,15 +3,16 @@ package model;
 public class Medico extends Usuario {
     Medico(){
         this.id = 0;
-        this.especialidade = "";
         this.nome = "";
         this.CRM = "";
     }
     
     private int id;
-    private String especialidade;
     private String nome;
+    private String cpf, rg, nasc, contato;
     private String CRM;
+    private String endereco;
+    private int sexo; 
     
     public int getId() {
         return id;
@@ -19,14 +20,6 @@ public class Medico extends Usuario {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getEspecialidade() {
-        return especialidade;
-    }
-
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
     }
 
     public String getNome() {

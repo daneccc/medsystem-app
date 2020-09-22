@@ -16,7 +16,7 @@ public class Paciente extends Usuario {
     private String nome, sexo;
     private Calendar data_nasc;
     private String CPF;
-    private Endereco endereco;
+    private String endereco;
     private String telefone;
     
     public int getId() {
@@ -69,11 +69,11 @@ public class Paciente extends Usuario {
         this.sexo = sexo;
     }
 
-    public Endereco getEndereco() {
+    public String getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
+    public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
 }
