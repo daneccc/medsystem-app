@@ -3,15 +3,6 @@ package model;
 import java.util.Calendar;
 
 public class Paciente extends Usuario {
-    Paciente(){
-        this.id = 0;
-        this.nome = "";
-        this.data_nasc = null;
-        this.CPF = "";
-        this.endereco = null;
-        this.telefone = "";
-    }
-    
     private int id;
     private String nome, sexo;
     private Calendar data_nasc;

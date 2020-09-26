@@ -158,19 +158,19 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         
-        if(campoUsuario.getText().equals("admin")&&campoSenha.getText().equals("1234")) {
+        if(campoUsuario.getText().equals("admin")&&campoSenha.getPassword().equals("1234")) {
             MainAdmin telaAdmin = new MainAdmin();
                       telaAdmin.setVisible(true);
             dispose();
-        } else if (campoUsuario.getText().equals("atendente")&&campoSenha.getText().equals("1234")) {
+        } else if (campoUsuario.getText().equals("atendente")&&campoSenha.getPassword().equals("1234")) {
             MainAtendente telaAtend = new MainAtendente();
                           telaAtend.setVisible(true);
             dispose();
-        } else if (campoUsuario.getText().equals("paciente")&&campoSenha.getText().equals("1234")) {
+        } else if (campoUsuario.getText().equals("paciente")&&campoSenha.getPassword().equals("1234")) {
             MainPaciente telaPaciente = new MainPaciente();
                           telaPaciente.setVisible(true);
             dispose();
-        } else if (campoUsuario.getText().equals("medico")&&campoSenha.getText().equals("1234")) {
+        } else if (campoUsuario.getText().equals("medico")&&campoSenha.getPassword().equals("1234")) {
             MainMedico telaMed = new MainMedico();
                           telaMed.setVisible(true);
             dispose();
