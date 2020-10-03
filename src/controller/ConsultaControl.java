@@ -1,7 +1,6 @@
 package controller;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import model.Atendente;
 import model.Consulta;

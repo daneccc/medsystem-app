@@ -1,5 +1,6 @@
 package controller;
 import java.util.ArrayList;
+import java.util.Date;
 import model.Administrador;
 
 public class AdministradorControl {
@@ -10,7 +11,7 @@ public class AdministradorControl {
     }
     
     static boolean AlterarAdministrador(int id, String nome, String cpf, String rg, String contato,
-            String nasc, String endereco, String sexo){
+            Date nasc, String endereco, String sexo){
         for(Administrador m : listaAdministradores){
             if(m.getId() == id){
                 m.setNome(nome);

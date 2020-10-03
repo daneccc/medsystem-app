@@ -5,6 +5,15 @@
  */
 package view.consulta;
 
+import controller.MedicoControl;
+import controller.PacienteControl;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Consulta;
+
 /**
  *
  * @author danie
@@ -58,6 +67,11 @@ public class NovaConsulta extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         try {
             jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -107,7 +121,7 @@ public class NovaConsulta extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,6 +163,29 @@ public class NovaConsulta extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(678, 288));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Consulta c = new Consulta();
+        
+        String nomePaciente = jTextField1.getText();
+        c.setPaciente(PacienteControl.PesquisarPacienteNome(nomePaciente));
+        
+        String nomeMedico = jTextField2.getText();
+        c.setMedico(MedicoControl.PesquisarMedicoNome(nomeMedico));
+        
+        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try {
+            c.setData(data.parse(jFormattedTextField2.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(NovaConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String hora = jFormattedTextField1.getText() + ":00";
+        
+        c.setHora(Time.valueOf(hora));
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

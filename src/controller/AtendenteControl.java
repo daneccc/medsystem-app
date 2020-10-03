@@ -1,16 +1,17 @@
 package controller;
 import java.util.ArrayList;
+import java.util.Date;
 import model.Atendente;
 
 public class AtendenteControl {
     static ArrayList<Atendente> listaAtendentees = new ArrayList();
     
-    static void CadastrarAtendente(Atendente p){
+    public static void CadastrarAtendente(Atendente p){
         listaAtendentees.add(p);
     }
     
-    static boolean AlterarAtendente(int id, String nome, String cpf, String rg, String contato,
-            String nasc, String endereco, String sexo){
+    public static boolean AlterarAtendente(int id, String nome, String cpf, String rg, String contato,
+        Date nasc, String endereco, String sexo){
         for(Atendente m : listaAtendentees){
             if(m.getId() == id){
                 m.setNome(nome);
@@ -26,7 +27,7 @@ public class AtendenteControl {
         return false;
     }
 
-    static Atendente PesquisarAtendente(String nome){
+    public static Atendente PesquisarAtendente(String nome){
         for(Atendente a : listaAtendentees){
             if (a.getNome().equals(nome))
                 return a;
@@ -34,11 +35,11 @@ public class AtendenteControl {
         return null;
     }
  
-    static void DeletarAtendente(Atendente a){
+    public static void DeletarAtendente(Atendente a){
         listaAtendentees.remove(a);
     }
     
-    static ArrayList<Atendente> ListarAtendentes(){
+    public static ArrayList<Atendente> ListarAtendentes(){
         return listaAtendentees;
     }
 }

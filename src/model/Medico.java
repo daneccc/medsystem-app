@@ -1,7 +1,7 @@
 package model;
 
 public class Medico extends Funcionario {
-    Medico(){
+    public Medico(){
         super();
     }
 
