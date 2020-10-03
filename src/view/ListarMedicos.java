@@ -5,6 +5,10 @@
  */
 package view;
 
+import controller.MedicoControl;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Medico;
 import view.cadastrar.NovoMedico;
 import view.editar.EditarMedico;
 
@@ -19,8 +23,27 @@ public class ListarMedicos extends javax.swing.JFrame {
      */
     public ListarMedicos() {
         initComponents();
+        createTable();
     }
 
+    public void createTable(){
+        DefaultTableModel dm = (DefaultTableModel) jTable1.getModel();
+        int rowCount = dm.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            dm.removeRow(i);
+        }
+        
+        for(Medico m: MedicoControl.ListarMedicos()){
+            String nome = m.getNome();
+            String crm = m.getCRM();
+            
+            String[] row = {nome, crm};
+            
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,6 +61,7 @@ public class ListarMedicos extends javax.swing.JFrame {
         campoPesquisarMedico = new javax.swing.JTextField();
         logo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnAtualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -48,17 +72,20 @@ public class ListarMedicos extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Nome", "CRM"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jTable1.setIntercellSpacing(new java.awt.Dimension(3, 3));
         jTable1.setMaximumSize(new java.awt.Dimension(2147483647, 120));
         jTable1.setMinimumSize(new java.awt.Dimension(60, 120));
@@ -85,11 +112,25 @@ public class ListarMedicos extends javax.swing.JFrame {
         });
 
         campoPesquisarMedico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        campoPesquisarMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoPesquisarMedicoActionPerformed(evt);
+            }
+        });
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Design sem nome (1).png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Digite o CRM do médico");
+
+        btnAtualizar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAtualizar.setForeground(new java.awt.Color(0, 102, 51));
+        btnAtualizar.setText("Atualizar Tabela");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,6 +142,8 @@ public class ListarMedicos extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(logo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnNovoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -118,7 +161,9 @@ public class ListarMedicos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNovoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnNovoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -150,9 +195,23 @@ public class ListarMedicos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoMedicoActionPerformed
 
     private void btnEditarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMedicoActionPerformed
-        EditarMedico editarMed = new EditarMedico();
+        String crm = campoPesquisarMedico.getText();
+        Medico m = MedicoControl.PesquisarMedico(crm);
+        if(m == null){
+            JOptionPane.showMessageDialog(this, "Atendente não encontrado.");
+            return;
+        }
+        EditarMedico editarMed = new EditarMedico(m);
         editarMed.setVisible(true);
     }//GEN-LAST:event_btnEditarMedicoActionPerformed
+
+    private void campoPesquisarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPesquisarMedicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoPesquisarMedicoActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        createTable();
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,6 +249,7 @@ public class ListarMedicos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnEditarMedico;
     private javax.swing.JButton btnNovoMedico;
     private javax.swing.JTextField campoPesquisarMedico;

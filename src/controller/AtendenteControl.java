@@ -27,14 +27,14 @@ public class AtendenteControl {
         return false;
     }
 
-    public static Atendente PesquisarAtendente(String nome){
+    public static Atendente PesquisarAtendente(String cpf){
         for(Atendente a : listaAtendentees){
-            if (a.getNome().equals(nome))
+            if (a.getCpf().equals(cpf))
                 return a;
         }
         return null;
     }
- 
+    
     public static void DeletarAtendente(Atendente a){
         listaAtendentees.remove(a);
     }

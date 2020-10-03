@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Atendente;
 
 /**
@@ -291,12 +292,14 @@ public class NovoAtendente extends javax.swing.JFrame {
             a.setNasc(data.parse(jFormattedTextFieldNascimento.getText()));
         } catch (ParseException ex) {
             Logger.getLogger(NovoAtendente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Erro no parsing da data.");
+            return;
         }
         
         a.setContato(jFormattedTextFieldContato.getText());
         
         AtendenteControl.CadastrarAtendente(a);
-        
+        JOptionPane.showMessageDialog(this, "Atendente cadastrado com sucesso");
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**

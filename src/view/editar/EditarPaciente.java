@@ -5,6 +5,9 @@
  */
 package view.editar;
 
+import controller.PacienteControl;
+import javax.swing.JOptionPane;
+import model.Paciente;
 import view.cadastrar.*;
 
 /**
@@ -16,8 +19,20 @@ public class EditarPaciente extends javax.swing.JFrame {
     /**
      * Creates new form NovoPaciente
      */
-    public EditarPaciente() {
-        initComponents();
+    public EditarPaciente(Paciente p) {
+        if(p == null){
+            JOptionPane.showMessageDialog(this, "Médico não encontrado.");
+        } else{
+            initComponents();
+            jTextFieldNome.setText(p.getNome());
+            jFormattedTextFieldCPF.setText(p.getCPF());
+            jFormattedTextFieldRG.setText(p.getRG());
+            jFormattedTextFieldContato.setText(p.getTelefone());
+            jFormattedTextFieldNascimento.setText(p.getData_nasc().toString());
+            jTextFieldEndereco.setText(p.getEndereco());
+            jComboBoxSexo.setSelectedItem(p.getSexo());
+            
+        }   
     }
 
     /**
@@ -50,8 +65,8 @@ public class EditarPaciente extends javax.swing.JFrame {
         jButtonSalvar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabelSexo = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jComboBoxSexo = new javax.swing.JComboBox<>();
+        jButtonExcluir = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -139,11 +154,16 @@ public class EditarPaciente extends javax.swing.JFrame {
         jLabelSexo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelSexo.setText("Sexo");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Feminino", "Masculino" }));
+        jComboBoxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Feminino", "Masculino" }));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(204, 0, 51));
-        jButton1.setText("Excluir paciente");
+        jButtonExcluir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonExcluir.setForeground(new java.awt.Color(204, 0, 51));
+        jButtonExcluir.setText("Excluir paciente");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Design sem nome (1).png"))); // NOI18N
 
@@ -188,7 +208,7 @@ public class EditarPaciente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(jButtonExcluir)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -201,7 +221,7 @@ public class EditarPaciente extends javax.swing.JFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabelSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(26, 26, 26)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBoxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
@@ -245,12 +265,12 @@ public class EditarPaciente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelSexo, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(jComboBox1))
+                    .addComponent(jComboBoxSexo))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45))
         );
 
@@ -280,6 +300,28 @@ public class EditarPaciente extends javax.swing.JFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        String cpf = jFormattedTextFieldCPF.getText();
+        Paciente p = PacienteControl.PesquisarPaciente(cpf);
+        if(p == null){
+            JOptionPane.showMessageDialog(this, "Paciente com CPF " + cpf + " não encontrado!");
+            return;
+        }
+        
+        
+        // 0 - sim, 1 - não
+        Object[] options = { "Sim", "Não" };
+        int resposta = JOptionPane.showOptionDialog(null, "Deseja remover o paciente de CPF " + cpf + " ?", "Informação", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        
+
+        if(resposta == 0){
+            PacienteControl.DeletarPaciente(p);
+            JOptionPane.showMessageDialog(this, "Paciente deletado com sucesso."); 
+            this.setVisible(false);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -326,16 +368,16 @@ public class EditarPaciente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarPaciente().setVisible(true);
+                new EditarPaciente(null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonSalvar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxSexo;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
     private javax.swing.JFormattedTextField jFormattedTextFieldContato;
     private javax.swing.JFormattedTextField jFormattedTextFieldNascimento;

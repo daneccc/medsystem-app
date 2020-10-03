@@ -5,6 +5,10 @@
  */
 package view;
 
+import controller.AtendenteControl;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Atendente;
 import view.cadastrar.NovoAtendente;
 import view.editar.EditarAtendente;
 
@@ -19,8 +23,27 @@ public class ListarAtendentes extends javax.swing.JFrame {
      */
     public ListarAtendentes() {
         initComponents();
+        createTable();
     }
 
+    private void createTable(){
+        DefaultTableModel dm = (DefaultTableModel) jTable.getModel();
+        int rowCount = dm.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            dm.removeRow(i);
+        }
+        
+        for(Atendente a: AtendenteControl.ListarAtendentes()){
+            String nome = a.getNome();
+            String cpf = a.getCpf();
+            
+            String[] row = {nome, cpf};
+           
+            dm.addRow(row);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,12 +55,13 @@ public class ListarAtendentes extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         scrollPanel = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        btnNovoAtendente = new javax.swing.JButton();
+        jTable = new javax.swing.JTable();
+        btnAtualizar = new javax.swing.JButton();
         btnEditarAtendente = new javax.swing.JButton();
         campoPesquisarAtendente = new javax.swing.JTextField();
         logo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnNovoAtendente1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -46,32 +70,42 @@ public class ListarAtendentes extends javax.swing.JFrame {
         scrollPanel.setBackground(new java.awt.Color(255, 255, 255));
         scrollPanel.setBorder(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Nome", "CPF"
             }
-        ));
-        jTable1.setIntercellSpacing(new java.awt.Dimension(3, 3));
-        jTable1.setMaximumSize(new java.awt.Dimension(2147483647, 120));
-        jTable1.setMinimumSize(new java.awt.Dimension(60, 120));
-        jTable1.setPreferredSize(new java.awt.Dimension(300, 120));
-        jTable1.setRowHeight(30);
-        scrollPanel.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
-        btnNovoAtendente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnNovoAtendente.setForeground(new java.awt.Color(0, 102, 51));
-        btnNovoAtendente.setText("Novo atendente");
-        btnNovoAtendente.addActionListener(new java.awt.event.ActionListener() {
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable.setIntercellSpacing(new java.awt.Dimension(3, 3));
+        jTable.setMaximumSize(new java.awt.Dimension(2147483647, 120));
+        jTable.setMinimumSize(new java.awt.Dimension(60, 120));
+        jTable.setPreferredSize(new java.awt.Dimension(300, 120));
+        jTable.setRowHeight(30);
+        scrollPanel.setViewportView(jTable);
+
+        btnAtualizar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAtualizar.setForeground(new java.awt.Color(0, 102, 51));
+        btnAtualizar.setText("Atualizar Tabela");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoAtendenteActionPerformed(evt);
+                btnAtualizarActionPerformed(evt);
             }
         });
 
@@ -91,6 +125,15 @@ public class ListarAtendentes extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Digite o CPF do atendente");
 
+        btnNovoAtendente1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNovoAtendente1.setForeground(new java.awt.Color(0, 102, 51));
+        btnNovoAtendente1.setText("Novo atendente");
+        btnNovoAtendente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoAtendente1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -108,17 +151,22 @@ public class ListarAtendentes extends javax.swing.JFrame {
                     .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(logo)
+                        .addGap(116, 116, 116)
+                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnNovoAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnNovoAtendente1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNovoAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNovoAtendente1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -144,15 +192,26 @@ public class ListarAtendentes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNovoAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoAtendenteActionPerformed
-        NovoAtendente novoAtendente = new NovoAtendente();
-        novoAtendente.setVisible(true);
-    }//GEN-LAST:event_btnNovoAtendenteActionPerformed
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        createTable();
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnEditarAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAtendenteActionPerformed
-        EditarAtendente editarAtendente = new EditarAtendente();
+        String cpf = campoPesquisarAtendente.getText();
+        Atendente a = AtendenteControl.PesquisarAtendente(cpf);
+        if(a == null){
+            JOptionPane.showMessageDialog(this, "Atendente não encontrado.");
+            return;
+        }
+        
+        EditarAtendente editarAtendente = new EditarAtendente(a);
         editarAtendente.setVisible(true);
     }//GEN-LAST:event_btnEditarAtendenteActionPerformed
+
+    private void btnNovoAtendente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoAtendente1ActionPerformed
+        NovoAtendente tela = new NovoAtendente();
+        tela.setVisible(true);
+    }//GEN-LAST:event_btnNovoAtendente1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,12 +249,13 @@ public class ListarAtendentes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnEditarAtendente;
-    private javax.swing.JButton btnNovoAtendente;
+    private javax.swing.JButton btnNovoAtendente1;
     private javax.swing.JTextField campoPesquisarAtendente;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     private javax.swing.JLabel logo;
     private javax.swing.JScrollPane scrollPanel;
     // End of variables declaration//GEN-END:variables
