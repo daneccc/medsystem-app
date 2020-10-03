@@ -5,6 +5,16 @@
  */
 package view.cadastrar;
 
+import controller.MedicoControl;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Agenda;
+import model.Horario;
+import model.Medico;
+
 /**
  *
  * @author danie
@@ -135,6 +145,11 @@ public class NovoMedico extends javax.swing.JFrame {
 
         jButtonSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
 
         jLabelSexo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelSexo.setText("Sexo");
@@ -234,7 +249,7 @@ public class NovoMedico extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel8)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,6 +336,60 @@ public class NovoMedico extends javax.swing.JFrame {
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox5ActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        Medico m = new Medico();
+        
+        m.setNome(jTextFieldNome.getText());
+        m.setRg(jFormattedTextFieldRG.getText());
+        m.setCpf(jFormattedTextFieldCPF.getText());
+        m.setEndereco(jTextFieldEndereco.getText());
+        
+        int indice1 = jComboBox1.getSelectedIndex(); // indice escolhido da ComboBox
+        m.setSexo(jComboBox1.getItemAt(indice1)); // elemento que corresponde ao índice escolhido
+        
+        Agenda agenda = new Agenda();
+        agenda.setFkMedico(m.getId());
+        
+        int indice2 = jComboBox2.getSelectedIndex();
+        Horario segunda = new Horario();
+        segunda.setNomeHorario(jComboBox2.getItemAt(indice2));
+        agenda.setDeSegunda(segunda);
+        
+        int indice3 = jComboBox3.getSelectedIndex();
+        Horario terca = new Horario();
+        terca.setNomeHorario(jComboBox3.getItemAt(indice3));
+        agenda.setDeTerca(terca);
+        
+        int indice4 = jComboBox4.getSelectedIndex();
+        Horario quarta = new Horario();
+        quarta.setNomeHorario(jComboBox3.getItemAt(indice4));
+        agenda.setDeQuarta(quarta);
+        
+        int indice5 = jComboBox5.getSelectedIndex();
+        Horario quinta = new Horario();
+        quinta.setNomeHorario(jComboBox3.getItemAt(indice5));
+        agenda.setDeQuinta(quinta);
+        
+        int indice6 = jComboBox6.getSelectedIndex();
+        Horario sexta = new Horario();
+        sexta.setNomeHorario(jComboBox3.getItemAt(indice6));
+        agenda.setDeSexta(sexta);
+        
+        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try {
+            m.setNasc(data.parse(jFormattedTextFieldNascimento.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(NovoMedico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        m.setContato(jFormattedTextFieldContato.getText());
+        
+        MedicoControl.CadastrarMedico(m);
+        ArrayList<Medico> listaMedicos = MedicoControl.ListarMedicos();
+        System.out.println(listaMedicos.get(0).getNome());
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
      * @param args the command line arguments

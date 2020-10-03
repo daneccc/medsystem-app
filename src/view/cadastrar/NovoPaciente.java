@@ -5,6 +5,13 @@
  */
 package view.cadastrar;
 
+import model.Paciente;
+import controller.PacienteControl;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author danie
@@ -123,6 +130,11 @@ public class NovoPaciente extends javax.swing.JFrame {
         Cancelar.setText("Cancelar");
 
         jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
 
         jLabelSexo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelSexo.setText("Sexo");
@@ -257,6 +269,30 @@ public class NovoPaciente extends javax.swing.JFrame {
     private void jFormattedTextFieldCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCPFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldCPFActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        Paciente p = new Paciente();
+        p.setNome(jTextFieldNome.getText());
+        p.setRG(jFormattedTextFieldRG.getText());
+        p.setCPF(jFormattedTextFieldCPF.getText());
+        p.setEndereco(jTextFieldEndereco.getText());
+        
+        int indice = jComboBox1.getSelectedIndex(); // indice escolhido da ComboBox
+        p.setSexo(jComboBox1.getItemAt(indice)); // elemento que corresponde ao índice escolhido
+        
+        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try {
+            p.setData_nasc(data.parse(jFormattedTextFieldNascimento.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(NovoPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        p.setTelefone(jFormattedTextFieldContato.getText());
+        
+        PacienteControl.CadastrarPaciente(p);
+        
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
      * @param args the command line arguments

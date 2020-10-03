@@ -1,11 +1,12 @@
 package model;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class Paciente extends Usuario {
     private int id;
     private String nome, sexo;
-    private Calendar data_nasc;
+    private Date data_nasc;
+    private String RG;
     private String CPF;
     private String endereco;
     private String telefone;
@@ -27,11 +28,11 @@ public class Paciente extends Usuario {
         this.nome = nome;
     }
 
-    public Calendar getData_nasc() {
+    public Date getData_nasc() {
         return data_nasc;
     }
 
-    public void setData_nasc(Calendar data_nasc) {
+    public void setData_nasc(Date data_nasc) {
         this.data_nasc = data_nasc;
     }
 
@@ -66,5 +67,13 @@ public class Paciente extends Usuario {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+    
+    public String getRG() {
+        return RG;
+    }
+    
+    public void setRG(String RG) {
+        this.RG = RG;
     }
 }

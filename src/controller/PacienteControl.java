@@ -1,20 +1,53 @@
 package controller;
+import java.util.ArrayList;
+import java.util.Date;
 import model.Paciente;
 
 public class PacienteControl {
-    static void CadastrarPaciente(Paciente p){
-        
+    static ArrayList<Paciente> listaPacientes = new ArrayList();
+    
+    public static void CadastrarPaciente(Paciente p){
+        listaPacientes.add(p);
     }
     
-    static void AlterarPaciente(Paciente p){
-        
+    public static boolean AlterarPaciente(int id, String nome, String sexo, Date data_nasc,
+            String CPF, String endereco, String telefone){
+        for(Paciente p1 : listaPacientes){
+            if(p1.getId() == id){
+                p1.setNome(nome);
+                p1.setSexo(sexo);
+                p1.setData_nasc(data_nasc);
+                p1.setCPF(CPF);
+                p1.setEndereco(endereco);
+                p1.setTelefone(telefone);
+                return true;
+            }
+        }
+        return false;
     }
 
-    static void PesquisarPaciente(Paciente p){
-        
+    public static Paciente PesquisarPaciente(String cpf){
+        for(Paciente p : listaPacientes){
+            if (p.getCPF().equals(cpf))
+                return p;
+        }
+        return null;
+    }
+    
+    public static Paciente PesquisarPacienteNome(String nome){
+        for(Paciente p : listaPacientes){
+            if (p.getNome().equals(nome)) {
+                return p;
+            }
+        }
+        return null;
     }
  
-    static void DeletarPaciente(Paciente p){
-        
+    public static void DeletarPaciente(Paciente p){
+        listaPacientes.remove(p);
+    }
+    
+    public static ArrayList<Paciente> ListarPacientes(){
+        return listaPacientes;
     }
 }

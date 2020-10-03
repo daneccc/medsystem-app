@@ -1,9 +1,14 @@
 package model;
 
+import java.util.Date;
+
+
+
 abstract public class Funcionario extends Usuario {
     
     private int id;
-    private String nome, cpf, rg, contato, nasc, endereco, sexo;
+    private String nome, cpf, rg, contato, endereco, sexo;
+    private Date nasc;
 
     public int getId() {
         return id;
@@ -45,11 +50,11 @@ abstract public class Funcionario extends Usuario {
         this.contato = contato;
     }
 
-    public String getNasc() {
+    public Date getNasc() {
         return nasc;
     }
 
-    public void setNasc(String nasc) {
+    public void setNasc(Date nasc) {
         this.nasc = nasc;
     }
 
