@@ -6,13 +6,13 @@ public class HorarioControl {
     static ArrayList<Horario> listaHorarios = new ArrayList();
     static int id=0;
     
-    static void CadastrarHorario(Horario p){
+    public static void CadastrarHorario(Horario p){
         id++;
         p.setId(id);
         listaHorarios.add(p);
     }
     
-    static boolean AlterarHorario(int id, String nomeHorario){
+    public static boolean AlterarHorario(int id, String nomeHorario){
         for(Horario h : listaHorarios){
             if(h.getId() == id){
                 h.setNomeHorario(nomeHorario);
@@ -22,7 +22,7 @@ public class HorarioControl {
         return false;
     }
 
-    static Horario PesquisarHorario(int id){
+    public static Horario PesquisarHorario(int id){
         for(Horario h : listaHorarios){
             if (h.getId() == id)
                 return h;
@@ -30,12 +30,12 @@ public class HorarioControl {
         return null;
     }
  
-    static void DeletarHorario(Horario h){
+    public static void DeletarHorario(Horario h){
         listaHorarios.remove(h);
-        id++;
+        id--;
     }
     
-    static ArrayList<Horario> ListarHorarios(){
+    public static ArrayList<Horario> ListarHorarios(){
         return listaHorarios;
     }
 }

@@ -6,13 +6,13 @@ public class TipoAtendimentoControl {
     static ArrayList<TipoAtendimento> listaTipoAtendimentos = new ArrayList();
     static int id=0;
     
-    static void CadastrarTipoAtendimento(TipoAtendimento p){
+    public static void CadastrarTipoAtendimento(TipoAtendimento p){
         id++;
         p.setId(id);
         listaTipoAtendimentos.add(p);
     }
     
-    static boolean AlterarTipoAtendimento(int id, String tipoAtendimento){
+    public static boolean AlterarTipoAtendimento(int id, String tipoAtendimento){
         for(TipoAtendimento ta : listaTipoAtendimentos){
             if(ta.getId() == id){
                 ta.setTipoAtendimento(tipoAtendimento);
@@ -22,7 +22,7 @@ public class TipoAtendimentoControl {
         return false;
     }
 
-    static TipoAtendimento PesquisarTipoAtendimento(int id){
+    public static TipoAtendimento PesquisarTipoAtendimento(int id){
         for(TipoAtendimento ta : listaTipoAtendimentos){
             if (ta.getId() == id)
                 return ta;
@@ -30,12 +30,12 @@ public class TipoAtendimentoControl {
         return null;
     }
  
-    static void DeletarTipoAtendimento(TipoAtendimento ta){
+    public static void DeletarTipoAtendimento(TipoAtendimento ta){
         listaTipoAtendimentos.remove(ta);
-        id++;
+        id--;
     }
     
-    static ArrayList<TipoAtendimento> ListarTipoAtendimentos(){
+    public static ArrayList<TipoAtendimento> ListarTipoAtendimentos(){
         return listaTipoAtendimentos;
     }
 }

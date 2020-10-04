@@ -39,7 +39,7 @@ public class AgendaControl {
  
     static void DeletarAgenda(Agenda c){
         listaAgendas.remove(c);
-        id++;
+        id--;
     }
     
     static ArrayList<Agenda> ListarAgendas(){

@@ -6,13 +6,13 @@ public class StatusControl {
     static ArrayList<Status> listaStatus = new ArrayList();
     static int id=0;
     
-    static void CadastrarStatus(Status p){
+    public static void CadastrarStatus(Status p){
         id++;
         p.setId(id);
         listaStatus.add(p);
     }
     
-    static boolean AlterarStatus(int id, String nome){
+    public static boolean AlterarStatus(int id, String nome){
         for(Status s : listaStatus){
             if(s.getId() == id){
                 s.setNome(nome);
@@ -22,7 +22,7 @@ public class StatusControl {
         return false;
     }
 
-    static Status PesquisarStatus(int id){
+    public static Status PesquisarStatus(int id){
         for(Status s : listaStatus){
             if (s.getId() == id)
                 return s;
@@ -30,12 +30,12 @@ public class StatusControl {
         return null;
     }
  
-    static void DeletarStatus(Status s){
+    public static void DeletarStatus(Status s){
         listaStatus.remove(s);
-        id++;
+        id--;
     }
     
-    static ArrayList<Status> ListarStatuss(){
+    public static ArrayList<Status> ListarStatuss(){
         return listaStatus;
     }
 }

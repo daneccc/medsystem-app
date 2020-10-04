@@ -47,7 +47,7 @@ public class PacienteControl {
  
     public static void DeletarPaciente(Paciente p){
         listaPacientes.remove(p);
-        id++;
+        id--;
     }
     
     public static ArrayList<Paciente> ListarPacientes(){

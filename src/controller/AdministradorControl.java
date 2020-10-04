@@ -39,7 +39,7 @@ public class AdministradorControl {
  
     static void DeletarAdministrador(Administrador a){
         listaAdministradores.remove(a);
-        id++;
+        id--;
     }
     
     static ArrayList<Administrador> ListarAdministradors(){

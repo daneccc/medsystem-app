@@ -51,7 +51,7 @@ public class MedicoControl {
  
     public static void DeletarMedico(Medico m){
         listaMedicos.remove(m);
-        id++;
+        id--;
     }
     
     public static ArrayList<Medico> ListarMedicos(){

@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package view;
-
+import controller.*;
+import model.Horario;
+import model.Status;
+import model.TipoAtendimento;
 /**
  *
  * @author danie
@@ -16,6 +19,39 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        String[] atendimentos = {"Retorno", "Consulta"};
+        int i = 0;
+        
+        for(String tipo : atendimentos){
+            TipoAtendimento tp = new TipoAtendimento();
+            tp.setId(i);
+            tp.setTipoAtendimento(tipo);
+            TipoAtendimentoControl.CadastrarTipoAtendimento(tp);
+            i++;
+        }
+        
+        i = 0;
+        String[] status = {"Atendido", "Aguardando Consulta"};
+        
+        for(String st : status){
+            Status stat = new Status();
+            stat.setId(i);
+            stat.setNome(st);
+            StatusControl.CadastrarStatus(stat);
+            i++;
+        }
+        
+        i=0;
+        String[] horarios = {"Manhã", "Tarde", "Integral"};
+        
+        for(String hr : horarios){
+            Horario horario = new Horario();
+            horario.setId(i);
+            horario.setNomeHorario(hr);
+            HorarioControl.CadastrarHorario(horario);
+            i++;
+        }
+        
     }
 
     /**

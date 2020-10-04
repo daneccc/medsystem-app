@@ -39,7 +39,7 @@ public class AtendenteControl {
     
     public static void DeletarAtendente(Atendente a){
         listaAtendentees.remove(a);
-        id++;
+        id--;
     }
     
     public static ArrayList<Atendente> ListarAtendentes(){

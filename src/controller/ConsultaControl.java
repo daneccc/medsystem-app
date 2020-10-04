@@ -44,7 +44,7 @@ public class ConsultaControl {
  
     public static void DeletarConsulta(Consulta c){
         listaConsultas.remove(c);
-        id++;
+        id--;
     }
     
     public static ArrayList<Consulta> ListarConsultas(){
