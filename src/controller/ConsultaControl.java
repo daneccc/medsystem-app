@@ -1,5 +1,7 @@
 package controller;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import model.Atendente;
@@ -12,11 +14,11 @@ import model.TipoAtendimento;
 public class ConsultaControl {
     static ArrayList<Consulta> listaConsultas = new ArrayList();
     
-    static void CadastrarConsulta(Consulta p){
+    public static void CadastrarConsulta(Consulta p){
         listaConsultas.add(p);
     }    
     
-    static boolean AlterarConsulta(int id, Paciente paciente, Medico medico, Date data,
+    public static boolean AlterarConsulta(int id, Paciente paciente, Medico medico, Date data,
             Time hora, Atendente atendente, Status status, TipoAtendimento tipoAtendimento){
         for(Consulta c : listaConsultas){
             if(c.getId() == id){
@@ -33,19 +35,20 @@ public class ConsultaControl {
         return false;
     }
 
-    static Consulta PesquisarConsulta(Date data){
+    public static Consulta PesquisarConsulta(Date data){
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         for(Consulta c : listaConsultas){
-            if (c.getData() == data)
+            if (c.getData().contentEquals(df.format(data)))
                 return c;
         }
         return null;
     }
  
-    static void DeletarConsulta(Consulta c){
+    public static void DeletarConsulta(Consulta c){
         listaConsultas.remove(c);
     }
     
-    static ArrayList<Consulta> ListarConsultas(){
+    public static ArrayList<Consulta> ListarConsultas(){
         return listaConsultas;
     }
 }

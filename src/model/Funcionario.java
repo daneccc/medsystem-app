@@ -1,5 +1,7 @@
 package model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -50,8 +52,9 @@ abstract public class Funcionario extends Usuario {
         this.contato = contato;
     }
 
-    public Date getNasc() {
-        return nasc;
+    public String getNasc() {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        return df.format(this.nasc);
     }
 
     public void setNasc(Date nasc) {

@@ -151,6 +151,11 @@ public class NovoMedico extends javax.swing.JFrame {
 
         Cancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
 
         jButtonSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonSalvar.setText("Salvar");
@@ -273,7 +278,7 @@ public class NovoMedico extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel8)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,7 +354,7 @@ public class NovoMedico extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(718, 583));
+        setSize(new java.awt.Dimension(794, 583));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -367,12 +372,31 @@ public class NovoMedico extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         Medico m = new Medico();
+        int erros = 0; // Registra quantos campos obrigatórios o usuário não preencheu
+        ArrayList<String> campo_erro = new ArrayList<>();
+        String msg_erro = "O(s) seguinte(s) campo(s) precisa(m) ser preenchido(s):\n";
         
         m.setNome(jTextFieldNome.getText());
+        if(m.getNome().equals("")) {
+            campo_erro.add("- Nome\n");
+            erros++;
+        }
+        
         m.setRg(jFormattedTextFieldRG.getText());
+        
         m.setCpf(jFormattedTextFieldCPF.getText());
+        if(m.getCpf().charAt(0) == ' ') {
+            campo_erro.add("- CPF\n");
+            erros++;
+        }
+        
         m.setEndereco(jTextFieldEndereco.getText());
+        
         m.setCRM(jTextFieldCRM.getText());
+        if(m.getCRM().equals("")) {
+            campo_erro.add("- CRM\n");
+            erros++;
+        }
         
         int indice1 = jComboBox1.getSelectedIndex(); // indice escolhido da ComboBox
         m.setSexo(jComboBox1.getItemAt(indice1)); // elemento que corresponde ao índice escolhido
@@ -411,15 +435,32 @@ public class NovoMedico extends javax.swing.JFrame {
             m.setNasc(data.parse(jFormattedTextFieldNascimento.getText()));
         } catch (ParseException ex) {
             Logger.getLogger(NovoMedico.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Erro no parsing da data");
+            JOptionPane.showMessageDialog(this, "O campo 'Nascimento' precisa ser preenchido");
             return;
         }
         
         m.setContato(jFormattedTextFieldContato.getText());
+        if(m.getContato().charAt(1) == ' ') {
+            campo_erro.add("- Contato\n");
+            erros++;
+        }
         
-        MedicoControl.CadastrarMedico(m);
-
-        JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso");
+        if(erros > 0) {
+            String aux = msg_erro;
+            String mensagem = "";
+            for(int i=0; i < campo_erro.size(); i++) {
+                mensagem = aux.concat(campo_erro.get(i));
+                aux = mensagem;
+            }
+            JOptionPane.showMessageDialog(this, mensagem);
+        }
+        
+        // se nenhum campo obrigatório deixou de ser preenchido, exibe a mensagem de sucesso 
+        else {
+            MedicoControl.CadastrarMedico(m);
+            JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso");
+            dispose();
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jTextFieldEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEnderecoActionPerformed
@@ -429,6 +470,10 @@ public class NovoMedico extends javax.swing.JFrame {
     private void jTextFieldCRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCRMActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCRMActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        dispose(); // a tela é fechada
+    }//GEN-LAST:event_CancelarActionPerformed
 
     /**
      * @param args the command line arguments

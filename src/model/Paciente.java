@@ -1,5 +1,7 @@
 package model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Paciente extends Usuario {
@@ -28,8 +30,9 @@ public class Paciente extends Usuario {
         this.nome = nome;
     }
 
-    public Date getData_nasc() {
-        return data_nasc;
+    public String getData_nasc() {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        return df.format(this.data_nasc);
     }
 
     public void setData_nasc(Date data_nasc) {

@@ -9,6 +9,7 @@ import model.Paciente;
 import controller.PacienteControl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -129,6 +130,11 @@ public class NovoPaciente extends javax.swing.JFrame {
         });
 
         Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
 
         jButtonSalvar.setText("Salvar");
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -239,7 +245,7 @@ public class NovoPaciente extends javax.swing.JFrame {
                     .addComponent(jTextFieldEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelSexo, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(jLabelSexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBox1))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -273,9 +279,24 @@ public class NovoPaciente extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         Paciente p = new Paciente();
+        int erros = 0; // Registra quantos campos obrigatórios o usuário não preencheu
+        ArrayList<String> campo_erro = new ArrayList<>();
+        String msg_erro = "O(s) seguinte(s) campo(s) precisa(m) ser preenchido(s):\n";
+        
         p.setNome(jTextFieldNome.getText());
+        if(p.getNome().equals("")) {
+            campo_erro.add("- Nome\n");
+            erros++;
+        }
+        
         p.setRG(jFormattedTextFieldRG.getText());
+        
         p.setCPF(jFormattedTextFieldCPF.getText());
+        if(p.getCPF().charAt(0) == ' ') {
+            campo_erro.add("- CPF\n");
+            erros++;
+        }
+        
         p.setEndereco(jTextFieldEndereco.getText());
         
         int indice = jComboBox1.getSelectedIndex(); // indice escolhido da ComboBox
@@ -287,16 +308,37 @@ public class NovoPaciente extends javax.swing.JFrame {
             p.setData_nasc(data.parse(jFormattedTextFieldNascimento.getText()));
         } catch (ParseException ex) {
             Logger.getLogger(NovoPaciente.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Erro no parsing da data.");
+            JOptionPane.showMessageDialog(this, "O campo 'Nascimento' precisa ser preenchido");
             return;
         }
         
         p.setTelefone(jFormattedTextFieldContato.getText());
+        if(p.getTelefone().charAt(1) == ' ') {
+            campo_erro.add("- Contato\n");
+            erros++;
+        }
         
-        PacienteControl.CadastrarPaciente(p);
+        if(erros > 0) {
+            String aux = msg_erro;
+            String mensagem = "";
+            for(int i=0; i < campo_erro.size(); i++) {
+                mensagem = aux.concat(campo_erro.get(i));
+                aux = mensagem;
+            }
+            JOptionPane.showMessageDialog(this, mensagem);
+        }
         
-        JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso");
+        // se nenhum campo obrigatório deixou de ser preenchido, exibe a mensagem de sucesso 
+        else {
+            PacienteControl.CadastrarPaciente(p);
+            JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso");
+            dispose();
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        dispose(); // a tela é fechada
+    }//GEN-LAST:event_CancelarActionPerformed
 
     /**
      * @param args the command line arguments

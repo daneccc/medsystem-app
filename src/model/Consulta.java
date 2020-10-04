@@ -1,5 +1,7 @@
 package model;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Consulta {  
@@ -42,8 +44,9 @@ public class Consulta {
         this.medico = medico;
     }
 
-    public Date getData() {
-        return data;
+    public String getData() {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        return df.format(this.data);
     }
 
     public void setData(Date data) {
@@ -66,8 +69,9 @@ public class Consulta {
         this.tipoAtendimento = tipoAtendimento;
     }
 
-    public Time getHora() {
-        return hora;
+    public String getHora() {
+        String hora[] = this.hora.toString().split(":", 2);
+        return hora[0];
     }
 
     public void setHora(Time hora) {

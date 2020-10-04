@@ -8,6 +8,7 @@ package view.cadastrar;
 import controller.AtendenteControl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -130,6 +131,11 @@ public class NovoAtendente extends javax.swing.JFrame {
 
         Cancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
 
         jButtonSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonSalvar.setText("Salvar");
@@ -203,7 +209,7 @@ public class NovoAtendente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,7 +270,7 @@ public class NovoAtendente extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(718, 504));
+        setSize(new java.awt.Dimension(708, 504));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -278,9 +284,24 @@ public class NovoAtendente extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         Atendente a = new Atendente();
+        int erros = 0; // Registra quantos campos obrigatórios o usuário não preencheu
+        ArrayList<String> campo_erro = new ArrayList<>();
+        String msg_erro = "O(s) seguinte(s) campo(s) precisa(m) ser preenchido(s):\n";
+        
         a.setNome(jTextFieldNome.getText());
+        if(a.getNome().equals("")) {
+            campo_erro.add("- Nome\n");
+            erros++;
+        }
+        
         a.setRg(jFormattedTextFieldRG.getText());
+        
         a.setCpf(jFormattedTextFieldCPF.getText());
+        if(a.getCpf().charAt(0) == ' ') {
+            campo_erro.add("- CPF\n");
+            erros++;
+        }
+        
         a.setEndereco(jTextFieldEndereco.getText());
         
         int indice = jComboBox1.getSelectedIndex(); // indice escolhido da ComboBox
@@ -292,15 +313,36 @@ public class NovoAtendente extends javax.swing.JFrame {
             a.setNasc(data.parse(jFormattedTextFieldNascimento.getText()));
         } catch (ParseException ex) {
             Logger.getLogger(NovoAtendente.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Erro no parsing da data.");
+            JOptionPane.showMessageDialog(this, "O campo 'Nascimento' precisa ser preenchido");
             return;
         }
         
         a.setContato(jFormattedTextFieldContato.getText());
+        if(a.getContato().charAt(1) == ' ') {
+            campo_erro.add("- Contato");
+            erros++;
+        }
         
-        AtendenteControl.CadastrarAtendente(a);
-        JOptionPane.showMessageDialog(this, "Atendente cadastrado com sucesso");
+        if(erros > 0) {
+            String aux = msg_erro;
+            String mensagem = "";
+            for(int i=0; i < campo_erro.size(); i++) {
+                mensagem = aux.concat(campo_erro.get(i));
+                aux = mensagem;
+            }
+            JOptionPane.showMessageDialog(this, mensagem);
+        }
+        
+        else {
+            AtendenteControl.CadastrarAtendente(a);
+            JOptionPane.showMessageDialog(this, "Atendente cadastrado com sucesso");
+            dispose();
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        dispose(); // a tela é fechada
+    }//GEN-LAST:event_CancelarActionPerformed
 
     /**
      * @param args the command line arguments

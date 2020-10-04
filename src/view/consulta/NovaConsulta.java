@@ -5,13 +5,16 @@
  */
 package view.consulta;
 
+import controller.ConsultaControl;
 import controller.MedicoControl;
 import controller.PacienteControl;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Consulta;
 
 /**
@@ -166,12 +169,23 @@ public class NovaConsulta extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Consulta c = new Consulta();
+        int erros = 0;
+        ArrayList<String> campo_erro = new ArrayList<>();
+        String msg_erro = "O(s) seguinte(s) campo(s) precisa(m) ser preenchido(s):\n";
         
         String nomePaciente = jTextField1.getText();
         c.setPaciente(PacienteControl.PesquisarPacienteNome(nomePaciente));
+        if(c.getPaciente().getNome().equals("")) {
+            campo_erro.add("- Paciente\n");
+            erros++;
+        }
         
         String nomeMedico = jTextField2.getText();
         c.setMedico(MedicoControl.PesquisarMedicoNome(nomeMedico));
+        if(c.getMedico().getNome().equals("")) {
+            campo_erro.add("- Médico\n");
+            erros++;
+        }
         
         SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
         
@@ -181,10 +195,31 @@ public class NovaConsulta extends javax.swing.JFrame {
             Logger.getLogger(NovaConsulta.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        String hora = jFormattedTextField1.getText() + ":00";
+        if(c.getData().charAt(0) == ' ') {
+            campo_erro.add("- Data\n");
+            erros++;
+        }
+        
+        String hora = jFormattedTextField1.getText();
         
         c.setHora(Time.valueOf(hora));
+        System.out.println(c.getHora());
         
+        if(erros > 0) {
+            String aux = msg_erro;
+            String mensagem = "";
+            for(int i=0; i < campo_erro.size(); i++) {
+                mensagem = aux.concat(campo_erro.get(i));
+                aux = mensagem;
+            }
+            JOptionPane.showMessageDialog(this, mensagem);
+        }
+        
+        else {
+            ConsultaControl.CadastrarConsulta(c); // atenção aqui
+            JOptionPane.showMessageDialog(this, "Consulta cadastrada com sucesso");
+            dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

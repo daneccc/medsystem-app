@@ -6,6 +6,12 @@
 package view.editar;
 
 import controller.AtendenteControl;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Atendente;
 import view.cadastrar.*;
@@ -26,7 +32,12 @@ public class EditarAtendente extends javax.swing.JFrame {
             initComponents();
             jTextFieldNome.setText(a.getNome());
             jFormattedTextFieldCPF.setText(a.getCpf());
-            // E os outros métodos....
+            jFormattedTextFieldRG.setText(a.getRg());
+            jFormattedTextFieldContato.setText(a.getContato());
+            jTextFieldEndereco.setText(a.getEndereco());
+            jFormattedTextFieldNascimento.setText(a.getNasc());
+            jComboBox1.setSelectedItem(a.getSexo());
+            jFormattedTextFieldContato.setText(a.getContato());
         }
     }
 
@@ -135,6 +146,11 @@ public class EditarAtendente extends javax.swing.JFrame {
 
         Cancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
 
         jButtonSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonSalvar.setText("Salvar");
@@ -172,7 +188,7 @@ public class EditarAtendente extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(45, Short.MAX_VALUE)
+                        .addContainerGap(43, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
@@ -219,7 +235,7 @@ public class EditarAtendente extends javax.swing.JFrame {
                                 .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,7 +310,61 @@ public class EditarAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextFieldCPFActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        // TODO add your handling code here:
+        try {
+            String cpf = jFormattedTextFieldCPF.getText();
+            Atendente a = AtendenteControl.PesquisarAtendente(cpf);
+            
+            int erros = 0; // Registra quantos campos obrigatórios o usuário não preencheu
+            ArrayList<String> campo_erro = new ArrayList<>();
+            String msg_erro = "O(s) seguinte(s) campo(s) precisa(m) ser preenchido(s):\n";
+            
+            String nome = jTextFieldNome.getText();
+            if(nome.equals("")) {
+                campo_erro.add("- Nome\n");
+                erros++;
+            }
+            
+            String RG = jFormattedTextFieldRG.getText();
+            
+            String CPF = jFormattedTextFieldCPF.getText();
+            
+            if(CPF.charAt(0) == ' ') {
+                campo_erro.add("- CPF\n");
+                erros++;
+            }
+            
+            String endereco = jTextFieldEndereco.getText();
+            
+            String sexo = (String) jComboBox1.getSelectedItem();
+            
+            String data1 = jFormattedTextFieldNascimento.getText();
+            Date nasc = new SimpleDateFormat("dd/MM/yyyy").parse(data1);
+            
+            String telefone = jFormattedTextFieldContato.getText();
+            if(telefone.charAt(1) == ' ') {
+                campo_erro.add("- Contato\n");
+                erros++;
+            }
+            
+            if(erros > 0) {
+                String aux = msg_erro;
+                String mensagem = "";
+                for(int i=0; i < campo_erro.size(); i++) {
+                    mensagem = aux.concat(campo_erro.get(i));
+                    aux = mensagem;
+                }
+                JOptionPane.showMessageDialog(this, mensagem);
+            }
+            
+            // se nenhum campo obrigatório deixou de ser preenchido, exibe a mensagem de sucesso
+            else {
+                AtendenteControl.AlterarAtendente(a.getId(), nome, CPF, RG, telefone, nasc, endereco, sexo);
+                JOptionPane.showMessageDialog(this, "Paciente editado com sucesso");
+                dispose();
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(EditarAtendente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
@@ -318,6 +388,10 @@ public class EditarAtendente extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_CancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -177,7 +177,7 @@ public class MainAtendente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarConsultaActionPerformed
-        EditarConsulta editarConsulta = new EditarConsulta();
+        EditarConsulta editarConsulta = new EditarConsulta(null);
         editarConsulta.setVisible(true);
     }//GEN-LAST:event_btnEditarConsultaActionPerformed
 
