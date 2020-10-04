@@ -4,8 +4,11 @@ import model.TipoAtendimento;
 
 public class TipoAtendimentoControl {
     static ArrayList<TipoAtendimento> listaTipoAtendimentos = new ArrayList();
+    static int id=0;
     
     static void CadastrarTipoAtendimento(TipoAtendimento p){
+        id++;
+        p.setId(id);
         listaTipoAtendimentos.add(p);
     }
     
@@ -29,6 +32,7 @@ public class TipoAtendimentoControl {
  
     static void DeletarTipoAtendimento(TipoAtendimento ta){
         listaTipoAtendimentos.remove(ta);
+        id++;
     }
     
     static ArrayList<TipoAtendimento> ListarTipoAtendimentos(){

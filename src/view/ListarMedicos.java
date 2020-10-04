@@ -191,14 +191,14 @@ public class ListarMedicos extends javax.swing.JFrame {
 
     private void btnNovoMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoMedicoActionPerformed
         NovoMedico novoMed = new NovoMedico();
-                    novoMed.setVisible(true);
+        novoMed.setVisible(true);
     }//GEN-LAST:event_btnNovoMedicoActionPerformed
 
     private void btnEditarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMedicoActionPerformed
         String crm = campoPesquisarMedico.getText();
         Medico m = MedicoControl.PesquisarMedico(crm);
         if(m == null){
-            JOptionPane.showMessageDialog(this, "Atendente não encontrado.");
+            JOptionPane.showMessageDialog(this, "Médico não encontrado.");
             return;
         }
         EditarMedico editarMed = new EditarMedico(m);

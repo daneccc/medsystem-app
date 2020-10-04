@@ -8,13 +8,7 @@ package view.consulta;
 import controller.ConsultaControl;
 import controller.MedicoControl;
 import controller.PacienteControl;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Consulta;
 import model.Medico;
@@ -195,59 +189,55 @@ public class EditarConsulta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            String data1 = jFormattedTextField2.getText();
-            Date data = new SimpleDateFormat("dd/MM/yyyy").parse(data1);
+        
+        String data = jFormattedTextField2.getText();
             
-            Consulta c = ConsultaControl.PesquisarConsulta(data);
-            int erros = 0;
-            ArrayList<String> campo_erro = new ArrayList<>();
-            String msg_erro = "O(s) seguinte(s) campo(s) precisa(m) ser preenchido(s):\n";
+        Consulta c = ConsultaControl.PesquisarConsulta(data);
+        int erros = 0;
+        ArrayList<String> campo_erro = new ArrayList<>();
+        String msg_erro = "O(s) seguinte(s) campo(s) precisa(m) ser preenchido(s):\n";
             
-            String paciente = jTextField1.getText();
-            if(paciente.equals("")) {
-                campo_erro.add("- Paciente\n");
-                erros++;
-            }
-            
-            String medico = jTextField2.getText();
-            if(medico.equals("")) {
-                campo_erro.add("- Médico\n");
-                erros++;
-            }
-            
-            if(data1.charAt(0) == ' ') {
-                campo_erro.add("- Data\n");
-                erros++;
-            }
-            
-            String hora = jFormattedTextField1.getText();
-            if(hora.charAt(0) == ' ') {
-                campo_erro.add("- Hora");
-                erros++;
-            }
-            
-            if(erros > 0) {
-                String aux = msg_erro;
-                String mensagem = "";
-                for(int i=0; i < campo_erro.size(); i++) {
-                    mensagem = aux.concat(campo_erro.get(i));
-                    aux = mensagem;
-                }
-                JOptionPane.showMessageDialog(this, mensagem);
-            }
-            
-            else {
-                Medico m = MedicoControl.PesquisarMedicoNome(medico);
-                Paciente p = PacienteControl.PesquisarPacienteNome(paciente);
-                
-                ConsultaControl.AlterarConsulta(c.getId(), p, m, data, Time.valueOf(hora), c.getAtendente(), c.getStatus(), c.getTipoAtendimento());
-                JOptionPane.showMessageDialog(this, "Consulta editada com sucesso");
-                dispose();
-            }
-        } catch (ParseException ex) {
-            Logger.getLogger(EditarConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        String paciente = jTextField1.getText();
+        if(paciente.equals("")) {
+            campo_erro.add("- Paciente\n");
+            erros++;
         }
+            
+        String medico = jTextField2.getText();
+        if(medico.equals("")) {
+            campo_erro.add("- Médico\n");
+            erros++;
+        }
+            
+        if(data.charAt(0) == ' ') {
+            campo_erro.add("- Data\n");
+            erros++;
+        }
+            
+        String hora = jFormattedTextField1.getText();
+        if(hora.charAt(0) == ' ') {
+            campo_erro.add("- Hora");
+            erros++;
+        }
+            
+        if(erros > 0) {
+            String aux = msg_erro;
+            String mensagem = "";
+            for(int i=0; i < campo_erro.size(); i++) {
+                mensagem = aux.concat(campo_erro.get(i));
+                aux = mensagem;
+            }
+            JOptionPane.showMessageDialog(this, mensagem);
+        }
+            
+        else {
+            Medico m = MedicoControl.PesquisarMedicoNome(medico);
+            Paciente p = PacienteControl.PesquisarPacienteNome(paciente);
+                
+            ConsultaControl.AlterarConsulta(c.getId(), c.getPaciente(), c.getMedico(), data, hora, c.getAtendente(), c.getStatus(), c.getTipoAtendimento());
+            JOptionPane.showMessageDialog(this, "Consulta editada com sucesso");
+            dispose();
+        } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

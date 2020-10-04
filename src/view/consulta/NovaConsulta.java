@@ -8,12 +8,7 @@ package view.consulta;
 import controller.ConsultaControl;
 import controller.MedicoControl;
 import controller.PacienteControl;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Consulta;
 
@@ -187,13 +182,8 @@ public class NovaConsulta extends javax.swing.JFrame {
             erros++;
         }
         
-        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-        
-        try {
-            c.setData(data.parse(jFormattedTextField2.getText()));
-        } catch (ParseException ex) {
-            Logger.getLogger(NovaConsulta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String data = jFormattedTextField2.getText();
+        c.setData(data);
         
         if(c.getData().charAt(0) == ' ') {
             campo_erro.add("- Data\n");
@@ -201,9 +191,11 @@ public class NovaConsulta extends javax.swing.JFrame {
         }
         
         String hora = jFormattedTextField1.getText();
-        
-        c.setHora(Time.valueOf(hora));
-        System.out.println(c.getHora());
+        c.setHora(hora);
+        if(c.getHora().charAt(0) == ' ') {
+            campo_erro.add("- Hora");
+            erros++;
+        }
         
         if(erros > 0) {
             String aux = msg_erro;

@@ -6,11 +6,7 @@
 package view.cadastrar;
 
 import controller.MedicoControl;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Agenda;
 import model.Horario;
@@ -429,15 +425,7 @@ public class NovoMedico extends javax.swing.JFrame {
         sexta.setNomeHorario(jComboBox3.getItemAt(indice6));
         agenda.setDeSexta(sexta);
         
-        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-        
-        try {
-            m.setNasc(data.parse(jFormattedTextFieldNascimento.getText()));
-        } catch (ParseException ex) {
-            Logger.getLogger(NovoMedico.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "O campo 'Nascimento' precisa ser preenchido");
-            return;
-        }
+        m.setNasc(jFormattedTextFieldNascimento.getText());
         
         m.setContato(jFormattedTextFieldContato.getText());
         if(m.getContato().charAt(1) == ' ') {

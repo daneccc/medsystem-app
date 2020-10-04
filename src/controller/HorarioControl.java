@@ -4,8 +4,11 @@ import model.Horario;
 
 public class HorarioControl {
     static ArrayList<Horario> listaHorarios = new ArrayList();
+    static int id=0;
     
     static void CadastrarHorario(Horario p){
+        id++;
+        p.setId(id);
         listaHorarios.add(p);
     }
     
@@ -29,6 +32,7 @@ public class HorarioControl {
  
     static void DeletarHorario(Horario h){
         listaHorarios.remove(h);
+        id++;
     }
     
     static ArrayList<Horario> ListarHorarios(){

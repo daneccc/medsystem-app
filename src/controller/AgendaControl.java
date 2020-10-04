@@ -5,8 +5,11 @@ import model.Horario;
 
 public class AgendaControl {
     static ArrayList<Agenda> listaAgendas = new ArrayList();
+    static int id=0;
     
     static void CadastrarAgenda(Agenda p){
+        id++;
+        p.setId(id);
         listaAgendas.add(p);
     }
 
@@ -36,6 +39,7 @@ public class AgendaControl {
  
     static void DeletarAgenda(Agenda c){
         listaAgendas.remove(c);
+        id++;
     }
     
     static ArrayList<Agenda> ListarAgendas(){

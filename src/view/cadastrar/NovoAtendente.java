@@ -6,11 +6,7 @@
 package view.cadastrar;
 
 import controller.AtendenteControl;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Atendente;
 
@@ -307,15 +303,7 @@ public class NovoAtendente extends javax.swing.JFrame {
         int indice = jComboBox1.getSelectedIndex(); // indice escolhido da ComboBox
         a.setSexo(jComboBox1.getItemAt(indice)); // elemento que corresponde ao índice escolhido
         
-        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-        
-        try {
-            a.setNasc(data.parse(jFormattedTextFieldNascimento.getText()));
-        } catch (ParseException ex) {
-            Logger.getLogger(NovoAtendente.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "O campo 'Nascimento' precisa ser preenchido");
-            return;
-        }
+        a.setNasc(jFormattedTextFieldNascimento.getText());
         
         a.setContato(jFormattedTextFieldContato.getText());
         if(a.getContato().charAt(1) == ' ') {

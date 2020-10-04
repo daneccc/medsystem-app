@@ -1,13 +1,9 @@
 package model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Paciente extends Usuario {
     private int id;
     private String nome, sexo;
-    private Date data_nasc;
+    private String data_nasc;
     private String RG;
     private String CPF;
     private String endereco;
@@ -31,11 +27,10 @@ public class Paciente extends Usuario {
     }
 
     public String getData_nasc() {
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        return df.format(this.data_nasc);
+        return this.data_nasc;
     }
 
-    public void setData_nasc(Date data_nasc) {
+    public void setData_nasc(String data_nasc) {
         this.data_nasc = data_nasc;
     }
 

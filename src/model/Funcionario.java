@@ -1,16 +1,10 @@
 package model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-
-
 abstract public class Funcionario extends Usuario {
     
     private int id;
     private String nome, cpf, rg, contato, endereco, sexo;
-    private Date nasc;
+    private String nasc;
 
     public int getId() {
         return id;
@@ -53,11 +47,10 @@ abstract public class Funcionario extends Usuario {
     }
 
     public String getNasc() {
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        return df.format(this.nasc);
+        return this.nasc;
     }
 
-    public void setNasc(Date nasc) {
+    public void setNasc(String nasc) {
         this.nasc = nasc;
     }
 

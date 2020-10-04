@@ -1,18 +1,20 @@
 package controller;
 import java.util.ArrayList;
-import java.util.Date;
 import model.Agenda;
 import model.Medico;
 
 public class MedicoControl {
     static ArrayList<Medico> listaMedicos = new ArrayList();
+    static int id=0;
     
     public static void CadastrarMedico(Medico p){
+        id++;
+        p.setId(id);
         listaMedicos.add(p);
     }
     
     public static boolean AlterarMedico(int id, String nome, String cpf, String rg, String contato,
-            Date nasc, String endereco, String sexo, String CRM, Agenda agendaDeTrabalho){
+            String nasc, String endereco, String sexo, String CRM, Agenda agendaDeTrabalho){
         for(Medico m : listaMedicos){
             if(m.getId() == id){
                 m.setNome(nome);
@@ -40,7 +42,7 @@ public class MedicoControl {
     
     public static Medico PesquisarMedicoNome(String nome){
         for(Medico m : listaMedicos){
-            if (m.getCRM().equals(nome)) {
+            if (m.getNome().equals(nome)) {
                 return m;
             }
         }    
@@ -49,6 +51,7 @@ public class MedicoControl {
  
     public static void DeletarMedico(Medico m){
         listaMedicos.remove(m);
+        id++;
     }
     
     public static ArrayList<Medico> ListarMedicos(){

@@ -200,10 +200,9 @@ public class ListarPacientes extends javax.swing.JFrame {
         String cpf = campoPesquisarPaciente.getText();
         Paciente p = PacienteControl.PesquisarPaciente(cpf);
         if(p == null){
-            JOptionPane.showMessageDialog(this, "Atendente não encontrado.");
+            JOptionPane.showMessageDialog(this, "Paciente não encontrado.");
             return;
         }
-        
         EditarPaciente editarPaciente = new EditarPaciente(p);
         editarPaciente.setVisible(true);
     }//GEN-LAST:event_btnEditarPacienteActionPerformed

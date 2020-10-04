@@ -1,17 +1,19 @@
 package controller;
 import java.util.ArrayList;
-import java.util.Date;
 import model.Atendente;
 
 public class AtendenteControl {
     static ArrayList<Atendente> listaAtendentees = new ArrayList();
+    static int id=0;
     
     public static void CadastrarAtendente(Atendente p){
+        id++;
+        p.setId(id);
         listaAtendentees.add(p);
     }
     
     public static boolean AlterarAtendente(int id, String nome, String cpf, String rg, String contato,
-        Date nasc, String endereco, String sexo){
+        String nasc, String endereco, String sexo){
         for(Atendente m : listaAtendentees){
             if(m.getId() == id){
                 m.setNome(nome);
@@ -37,6 +39,7 @@ public class AtendenteControl {
     
     public static void DeletarAtendente(Atendente a){
         listaAtendentees.remove(a);
+        id++;
     }
     
     public static ArrayList<Atendente> ListarAtendentes(){

@@ -4,8 +4,11 @@ import model.Status;
 
 public class StatusControl {
     static ArrayList<Status> listaStatus = new ArrayList();
+    static int id=0;
     
     static void CadastrarStatus(Status p){
+        id++;
+        p.setId(id);
         listaStatus.add(p);
     }
     
@@ -29,6 +32,7 @@ public class StatusControl {
  
     static void DeletarStatus(Status s){
         listaStatus.remove(s);
+        id++;
     }
     
     static ArrayList<Status> ListarStatuss(){

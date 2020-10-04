@@ -1,16 +1,12 @@
 package model;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Consulta {  
     private int id;
     private int numConsulta;
     private Paciente paciente;
     private Medico medico;
-    private Date data;
-    private Time hora;
+    private String data;
+    private String hora;
     private Atendente atendente;
     private Status status;
     private TipoAtendimento tipoAtendimento; //retorno ou consulta
@@ -45,11 +41,10 @@ public class Consulta {
     }
 
     public String getData() {
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        return df.format(this.data);
+        return this.data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
@@ -70,11 +65,10 @@ public class Consulta {
     }
 
     public String getHora() {
-        String hora[] = this.hora.toString().split(":", 2);
-        return hora[0];
+        return this.hora;
     }
 
-    public void setHora(Time hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 

@@ -6,17 +6,11 @@
 package view.editar;
 
 import controller.MedicoControl;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Agenda;
 import model.Horario;
 import model.Medico;
-import view.cadastrar.*;
 
 /**
  *
@@ -31,8 +25,7 @@ public class EditarMedico extends javax.swing.JFrame {
         if(m == null){
             JOptionPane.showMessageDialog(this, "Médico não encontrado.");
         } else{
-            initComponents();
-            Medico medico = m; 
+            initComponents(); 
             jTextFieldNome.setText(m.getNome());
             jTextFieldCRM.setText(m.getCRM());
             jFormattedTextFieldRG.setText(m.getRg());
@@ -40,14 +33,7 @@ public class EditarMedico extends javax.swing.JFrame {
             jFormattedTextFieldContato.setText(m.getContato());
             jFormattedTextFieldNascimento.setText(m.getNasc());
             jTextFieldEndereco.setText(m.getEndereco());
-            jTextFieldCRM.setText(m.getCRM());
             jComboBoxSexo.setSelectedItem(m.getSexo());
-            
-            jComboBox2.setSelectedItem(m.getAgendaDeTrabalho().getDeSegunda().getNomeHorario());
-            jComboBox3.setSelectedItem(m.getAgendaDeTrabalho().getDeTerca().getNomeHorario());
-            jComboBox4.setSelectedItem(m.getAgendaDeTrabalho().getDeQuarta().getNomeHorario());
-            jComboBox5.setSelectedItem(m.getAgendaDeTrabalho().getDeQuinta().getNomeHorario());
-            jComboBox6.setSelectedItem(m.getAgendaDeTrabalho().getDeSexta().getNomeHorario());
             
         }    
     }
@@ -425,93 +411,88 @@ public class EditarMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        try {
-            String crm = jTextFieldCRM.getText();
-            Medico m = MedicoControl.PesquisarMedico(crm);
+        String crm = jTextFieldCRM.getText();
+        Medico m = MedicoControl.PesquisarMedico(crm);
+           
+        int erros = 0; // Registra quantos campos obrigatórios o usuário não preencheu
+        ArrayList<String> campo_erro = new ArrayList<>();
+        String msg_erro = "O(s) seguinte(s) campo(s) precisa(m) ser preenchido(s):\n";
             
-            int erros = 0; // Registra quantos campos obrigatórios o usuário não preencheu
-            ArrayList<String> campo_erro = new ArrayList<>();
-            String msg_erro = "O(s) seguinte(s) campo(s) precisa(m) ser preenchido(s):\n";
+        String nome = jTextFieldNome.getText();
+        if(nome.equals("")) {
+            campo_erro.add("- Nome\n");
+            erros++;
+        }
+        String RG = jFormattedTextFieldRG.getText();
             
-            String nome = jTextFieldNome.getText();
-            if(nome.equals("")) {
-                campo_erro.add("- Nome\n");
-                erros++;
+        String CPF = jFormattedTextFieldCPF.getText();
+        if(CPF.charAt(0) == ' ') {
+            campo_erro.add("- CPF\n");
+            erros++;
+        }
+            
+        String endereco = jTextFieldEndereco.getText();
+            
+        String CRM = jTextFieldCRM.getText();
+            
+        if(CRM.equals("")) {
+            campo_erro.add("- CRM\n");
+            erros++;
+        }
+            
+        String sexo = (String) jComboBoxSexo.getSelectedItem();
+            
+        Agenda agenda = new Agenda();
+        agenda.setFkMedico(m.getId());
+            
+        int indice2 = jComboBox2.getSelectedIndex();
+        Horario segunda = new Horario();
+        segunda.setNomeHorario(jComboBox2.getItemAt(indice2));
+        agenda.setDeSegunda(segunda);
+            
+        int indice3 = jComboBox3.getSelectedIndex();
+        Horario terca = new Horario();
+        terca.setNomeHorario(jComboBox3.getItemAt(indice3));
+        agenda.setDeTerca(terca);
+            
+        int indice4 = jComboBox4.getSelectedIndex();
+        Horario quarta = new Horario();
+        quarta.setNomeHorario(jComboBox3.getItemAt(indice4));
+        agenda.setDeQuarta(quarta);
+            
+        int indice5 = jComboBox5.getSelectedIndex();
+        Horario quinta = new Horario();
+        quinta.setNomeHorario(jComboBox3.getItemAt(indice5));
+        agenda.setDeQuinta(quinta);
+            
+        int indice6 = jComboBox6.getSelectedIndex();
+        Horario sexta = new Horario();
+        sexta.setNomeHorario(jComboBox3.getItemAt(indice6));
+        agenda.setDeSexta(sexta);
+            
+        String nasc = jFormattedTextFieldNascimento.getText();
+            
+        String contato = jFormattedTextFieldContato.getText();
+        if(contato.charAt(1) == ' ') {
+            campo_erro.add("- Contato\n");
+            erros++;
+        }
+            
+        if(erros > 0) {
+            String aux = msg_erro;
+            String mensagem = "";
+            for(int i=0; i < campo_erro.size(); i++) {
+                mensagem = aux.concat(campo_erro.get(i));
+                aux = mensagem;
             }
-            String RG = jFormattedTextFieldRG.getText();
+            JOptionPane.showMessageDialog(this, mensagem);
+        }
             
-            String CPF = jFormattedTextFieldCPF.getText();
-            if(CPF.charAt(0) == ' ') {
-                campo_erro.add("- CPF\n");
-                erros++;
-            }
-            
-            String endereco = jTextFieldEndereco.getText();
-            
-            String CRM = jTextFieldCRM.getText();
-            
-            if(CRM.equals("")) {
-                campo_erro.add("- CRM\n");
-                erros++;
-            }
-            
-            String sexo = (String) jComboBoxSexo.getSelectedItem();
-            
-            Agenda agenda = new Agenda();
-            agenda.setFkMedico(m.getId());
-            
-            int indice2 = jComboBox2.getSelectedIndex();
-            Horario segunda = new Horario();
-            segunda.setNomeHorario(jComboBox2.getItemAt(indice2));
-            agenda.setDeSegunda(segunda);
-            
-            int indice3 = jComboBox3.getSelectedIndex();
-            Horario terca = new Horario();
-            terca.setNomeHorario(jComboBox3.getItemAt(indice3));
-            agenda.setDeTerca(terca);
-            
-            int indice4 = jComboBox4.getSelectedIndex();
-            Horario quarta = new Horario();
-            quarta.setNomeHorario(jComboBox3.getItemAt(indice4));
-            agenda.setDeQuarta(quarta);
-            
-            int indice5 = jComboBox5.getSelectedIndex();
-            Horario quinta = new Horario();
-            quinta.setNomeHorario(jComboBox3.getItemAt(indice5));
-            agenda.setDeQuinta(quinta);
-            
-            int indice6 = jComboBox6.getSelectedIndex();
-            Horario sexta = new Horario();
-            sexta.setNomeHorario(jComboBox3.getItemAt(indice6));
-            agenda.setDeSexta(sexta);
-            
-            String data1 = jFormattedTextFieldNascimento.getText();
-            Date nasc = new SimpleDateFormat("dd/MM/yyyy").parse(data1);
-            
-            String contato = jFormattedTextFieldContato.getText();
-            if(contato.charAt(1) == ' ') {
-                campo_erro.add("- Contato\n");
-                erros++;
-            }
-            
-            if(erros > 0) {
-                String aux = msg_erro;
-                String mensagem = "";
-                for(int i=0; i < campo_erro.size(); i++) {
-                    mensagem = aux.concat(campo_erro.get(i));
-                    aux = mensagem;
-                }
-                JOptionPane.showMessageDialog(this, mensagem);
-            }
-            
-            // se nenhum campo obrigatório deixou de ser preenchido, exibe a mensagem de sucesso
-            else {
-                MedicoControl.AlterarMedico(m.getId(), nome, CPF, RG, contato, nasc, endereco, sexo, CRM, agenda);
-                JOptionPane.showMessageDialog(this, "Médico editado com sucesso");
-                dispose();
-            }
-        } catch (ParseException ex) {
-            Logger.getLogger(EditarMedico.class.getName()).log(Level.SEVERE, null, ex);
+        // se nenhum campo obrigatório deixou de ser preenchido, exibe a mensagem de sucesso
+        else {
+            MedicoControl.AlterarMedico(m.getId(), nome, CPF, RG, contato, nasc, endereco, sexo, CRM, agenda);
+            JOptionPane.showMessageDialog(this, "Médico editado com sucesso");
+            dispose();
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 

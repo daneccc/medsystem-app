@@ -7,11 +7,7 @@ package view.cadastrar;
 
 import model.Paciente;
 import controller.PacienteControl;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -302,22 +298,13 @@ public class NovoPaciente extends javax.swing.JFrame {
         int indice = jComboBox1.getSelectedIndex(); // indice escolhido da ComboBox
         p.setSexo(jComboBox1.getItemAt(indice)); // elemento que corresponde ao índice escolhido
         
-        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-        
-        try {
-            p.setData_nasc(data.parse(jFormattedTextFieldNascimento.getText()));
-        } catch (ParseException ex) {
-            Logger.getLogger(NovoPaciente.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "O campo 'Nascimento' precisa ser preenchido");
-            return;
-        }
+        p.setData_nasc(jFormattedTextFieldNascimento.getText());
         
         p.setTelefone(jFormattedTextFieldContato.getText());
         if(p.getTelefone().charAt(1) == ' ') {
             campo_erro.add("- Contato\n");
             erros++;
         }
-        
         if(erros > 0) {
             String aux = msg_erro;
             String mensagem = "";

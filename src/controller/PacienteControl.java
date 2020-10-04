@@ -1,16 +1,18 @@
 package controller;
 import java.util.ArrayList;
-import java.util.Date;
 import model.Paciente;
 
 public class PacienteControl {
     static ArrayList<Paciente> listaPacientes = new ArrayList();
+    static int id;
     
     public static void CadastrarPaciente(Paciente p){
+        id++;
+        p.setId(id);
         listaPacientes.add(p);
     }
     
-    public static boolean AlterarPaciente(int id, String nome, String sexo, Date data_nasc,
+    public static boolean AlterarPaciente(int id, String nome, String sexo, String data_nasc,
             String CPF, String endereco, String telefone){
         for(Paciente p1 : listaPacientes){
             if(p1.getId() == id){
@@ -45,6 +47,7 @@ public class PacienteControl {
  
     public static void DeletarPaciente(Paciente p){
         listaPacientes.remove(p);
+        id++;
     }
     
     public static ArrayList<Paciente> ListarPacientes(){

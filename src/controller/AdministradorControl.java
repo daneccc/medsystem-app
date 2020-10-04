@@ -1,17 +1,19 @@
 package controller;
 import java.util.ArrayList;
-import java.util.Date;
 import model.Administrador;
 
 public class AdministradorControl {
     static ArrayList<Administrador> listaAdministradores = new ArrayList();
+    static int id=0;
     
     static void CadastrarAdministrador(Administrador p){
+        id++;
+        p.setId(id);
         listaAdministradores.add(p);
     }
     
     static boolean AlterarAdministrador(int id, String nome, String cpf, String rg, String contato,
-            Date nasc, String endereco, String sexo){
+            String nasc, String endereco, String sexo){
         for(Administrador m : listaAdministradores){
             if(m.getId() == id){
                 m.setNome(nome);
@@ -37,6 +39,7 @@ public class AdministradorControl {
  
     static void DeletarAdministrador(Administrador a){
         listaAdministradores.remove(a);
+        id++;
     }
     
     static ArrayList<Administrador> ListarAdministradors(){

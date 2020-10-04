@@ -6,15 +6,9 @@
 package view.editar;
 
 import controller.PacienteControl;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Paciente;
-import view.cadastrar.*;
 
 /**
  *
@@ -27,7 +21,7 @@ public class EditarPaciente extends javax.swing.JFrame {
      */
     public EditarPaciente(Paciente p) {
         if(p == null){
-            JOptionPane.showMessageDialog(this, "Médico não encontrado.");
+            JOptionPane.showMessageDialog(this, "Paciente não encontrado.");
         } else{
             initComponents();
             jTextFieldNome.setText(p.getNome());
@@ -309,60 +303,55 @@ public class EditarPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextFieldCPFActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        try {
-            String cpf = jFormattedTextFieldCPF.getText();
-            Paciente p = PacienteControl.PesquisarPaciente(cpf);
+        String cpf = jFormattedTextFieldCPF.getText();
+        Paciente p = PacienteControl.PesquisarPaciente(cpf);
+           
+        int erros = 0; // Registra quantos campos obrigatórios o usuário não preencheu
+        ArrayList<String> campo_erro = new ArrayList<>();
+        String msg_erro = "O(s) seguinte(s) campo(s) precisa(m) ser preenchido(s):\n";
+          
+        String nome = jTextFieldNome.getText();
+        if(nome.equals("")) {
+            campo_erro.add("- Nome\n");
+            erros++;
+        }
+           
+        String RG = jFormattedTextFieldRG.getText();
             
-            int erros = 0; // Registra quantos campos obrigatórios o usuário não preencheu
-            ArrayList<String> campo_erro = new ArrayList<>();
-            String msg_erro = "O(s) seguinte(s) campo(s) precisa(m) ser preenchido(s):\n";
+        String CPF = jFormattedTextFieldCPF.getText();
             
-            String nome = jTextFieldNome.getText();
-            if(nome.equals("")) {
-                campo_erro.add("- Nome\n");
-                erros++;
+        if(CPF.charAt(0) == ' ') {
+            campo_erro.add("- CPF\n");
+            erros++;
+        }
+            
+        String endereco = jTextFieldEndereco.getText();
+            
+        String sexo = (String) jComboBoxSexo.getSelectedItem();
+            
+        String nasc = jFormattedTextFieldNascimento.getText();
+            
+        String telefone = jFormattedTextFieldContato.getText();
+        if(telefone.charAt(1) == ' ') {
+            campo_erro.add("- Contato\n");
+            erros++;
+        }
+            
+        if(erros > 0) {
+            String aux = msg_erro;
+            String mensagem = "";
+            for(int i=0; i < campo_erro.size(); i++) {
+                mensagem = aux.concat(campo_erro.get(i));
+                aux = mensagem;
             }
+            JOptionPane.showMessageDialog(this, mensagem);
+        }
             
-            String RG = jFormattedTextFieldRG.getText();
-            
-            String CPF = jFormattedTextFieldCPF.getText();
-            
-            if(CPF.charAt(0) == ' ') {
-                campo_erro.add("- CPF\n");
-                erros++;
-            }
-            
-            String endereco = jTextFieldEndereco.getText();
-            
-            String sexo = (String) jComboBoxSexo.getSelectedItem();
-            
-            String data1 = jFormattedTextFieldNascimento.getText();
-            Date nasc = new SimpleDateFormat("dd/MM/yyyy").parse(data1);
-            
-            String telefone = jFormattedTextFieldContato.getText();
-            if(telefone.charAt(1) == ' ') {
-                campo_erro.add("- Contato\n");
-                erros++;
-            }
-            
-            if(erros > 0) {
-                String aux = msg_erro;
-                String mensagem = "";
-                for(int i=0; i < campo_erro.size(); i++) {
-                    mensagem = aux.concat(campo_erro.get(i));
-                    aux = mensagem;
-                }
-                JOptionPane.showMessageDialog(this, mensagem);
-            }
-            
-            // se nenhum campo obrigatório deixou de ser preenchido, exibe a mensagem de sucesso
-            else {
-                PacienteControl.AlterarPaciente(p.getId(), nome, sexo, nasc, CPF, endereco, telefone);
-                JOptionPane.showMessageDialog(this, "Paciente editado com sucesso");
-                dispose();
-            }
-        } catch (ParseException ex) {
-            Logger.getLogger(EditarPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        // se nenhum campo obrigatório deixou de ser preenchido, exibe a mensagem de sucesso
+        else {
+            PacienteControl.AlterarPaciente(p.getId(), nome, sexo, nasc, CPF, endereco, telefone);
+            JOptionPane.showMessageDialog(this, "Paciente editado com sucesso");
+            dispose();
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
