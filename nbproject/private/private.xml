@@ -2,19 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/danie/Documents/NetBeansProjects/MedSystem/src/view/Main.java</file>
-            <file>file:/C:/Users/danie/Documents/NetBeansProjects/MedSystem/src/view/editar/EditarMedico.java</file>
-            <file>file:/C:/Users/danie/Documents/NetBeansProjects/MedSystem/src/view/consulta/NovaConsulta.java</file>
-            <file>file:/C:/Users/danie/Documents/NetBeansProjects/MedSystem/src/view/MainPaciente.java</file>
-            <file>file:/C:/Users/danie/Documents/NetBeansProjects/MedSystem/src/view/MainAdmin.java</file>
-            <file>file:/C:/Users/danie/Documents/NetBeansProjects/MedSystem/src/view/editar/EditarAtendente.java</file>
-            <file>file:/C:/Users/danie/Documents/NetBeansProjects/MedSystem/src/view/editar/EditarPaciente.java</file>
-            <file>file:/C:/Users/danie/Documents/NetBeansProjects/MedSystem/src/view/cadastrar/NovoPaciente.java</file>
-            <file>file:/C:/Users/danie/Documents/NetBeansProjects/MedSystem/src/view/cadastrar/NovoMedico.java</file>
-            <file>file:/C:/Users/danie/Documents/NetBeansProjects/MedSystem/src/view/MainAtendente.java</file>
-            <file>file:/C:/Users/danie/Documents/NetBeansProjects/MedSystem/src/view/cadastrar/NovoAtendente.java</file>
-            <file>file:/C:/Users/danie/Documents/NetBeansProjects/MedSystem/src/view/TelaLogin.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

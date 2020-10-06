@@ -5,6 +5,8 @@
  */
 package view;
 
+import controller.ConsultaControl;
+import model.Consulta;
 import view.consulta.EditarConsulta;
 import view.consulta.NovaConsulta;
 
@@ -101,6 +103,11 @@ public class MainAtendente extends javax.swing.JFrame {
         scrollPanel1.setViewportView(jTable2);
 
         jButton2.setText("Pesquisar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data", "Médico", "Paciente" }));
 
@@ -155,7 +162,7 @@ public class MainAtendente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField1)
                             .addComponent(jComboBox1)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -206,6 +213,17 @@ public class MainAtendente extends javax.swing.JFrame {
         telaLogin.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        System.out.println("Consultas cadastradas:\n");
+        System.out.println("==========================================================");
+        System.out.println("Paciente     ||Medico     ||Data           ||Horario     ");
+        for (Consulta c : ConsultaControl.ListarConsultas()){
+            System.out.println(c.getPaciente().getNome() + "            " + c.getMedico().getNome() + "          " 
+                    + c.getData() + "       " + c.getHora());
+        }
+        System.out.println("===========================================================");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
