@@ -33,6 +33,10 @@ public class PacienteLogado {
         }
         return false;
     }
+    
+    public static void Deslogar() {
+        listaPacientes.remove(0);
+    }
 }
 
 

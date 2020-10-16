@@ -6,7 +6,18 @@
 package view;
 
 import com.sun.glass.events.KeyEvent;
+import controller.AtendenteControl;
+import controller.AtendenteLogado;
+import controller.MedicoControl;
+import controller.MedicoLogado;
+import controller.PacienteControl;
+import controller.PacienteLogado;
+import controller.UsuarioControl;
 import javax.swing.JOptionPane;
+import model.Administrador;
+import model.Atendente;
+import model.Medico;
+import model.Paciente;
 
 /**
  *
@@ -171,27 +182,49 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_campoSenhaActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        String usuario = campoUsuario.getText();
+        String senha = campoSenha.getText();
+        String tipo_usuario = (String) jComboBox1.getSelectedItem();
         
-        if(campoUsuario.getText().equals("admin") && campoSenha.getText().equals("1234")) {
-            MainAdmin telaAdmin = new MainAdmin();
-                      telaAdmin.setVisible(true);
-            dispose();
-        } else if (campoUsuario.getText().equals("atendente")&&campoSenha.getText().equals("1234")) {
-            MainAtendente telaAtend = new MainAtendente();
-                          telaAtend.setVisible(true);
-            dispose();
-        } else if (campoUsuario.getText().equals("paciente")&&campoSenha.getText().equals("1234")) {
-            MainPaciente telaPaciente = new MainPaciente();
-                          telaPaciente.setVisible(true);
-            dispose();
-        } else if (campoUsuario.getText().equals("medico")&&campoSenha.getText().equals("1234")) {
-            MainMedico telaMed = new MainMedico();
-                          telaMed.setVisible(true);
-            dispose();
-        }
-        else {
+        if(tipo_usuario.contentEquals("Paciente")) {
+            Paciente p = PacienteControl.PesquisarUsuarioPaciente(usuario, senha);
+            if(p != null) {
+                PacienteLogado.LogarPaciente(p);
+                MainPaciente telaPaciente = new MainPaciente(p);
+                telaPaciente.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Usuário e/ou senha inválido(a)(s).");
+              }
+        } else if(tipo_usuario.contentEquals("Médico")) {
+            Medico m = MedicoControl.PesquisarUsuarioMedico(usuario, senha);
+            if(m != null) {
+                MedicoLogado.LogarMedico(m);
+                MainMedico telaMed = new MainMedico(m);
+                telaMed.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Usuário e/ou senha inválido(a)(s).");
+              }
+        } else if(tipo_usuario.contentEquals("Atendente")) {
+            Atendente a = AtendenteControl.PesquisarUsuarioAtendente(usuario, senha);
+            if(a != null) {
+                AtendenteLogado.LogarAtendente(a);
+                MainAtendente telaAtend = new MainAtendente();
+                telaAtend.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Usuário e/ou senha inválido(a)(s).");
+              } 
+        } else if(tipo_usuario.contentEquals("Administrador")) {
+            if(usuario.equals("admin") && senha.equals("1234")) {
+                MainAdmin telaAdmin = new MainAdmin();
+                telaAdmin.setVisible(true);
+                dispose();
+            } else {
             JOptionPane.showMessageDialog(rootPane, "Usuário e/ou senha inválido(a)(s).");
-        }
+              }
+        } 
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void campoSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoSenhaKeyPressed
@@ -205,14 +238,14 @@ public class TelaLogin extends javax.swing.JFrame {
                 telaAtend.setVisible(true);
                 dispose();
             } else if (campoUsuario.getText().equals("paciente")&&campoSenha.getText().equals("1234")) {
-                MainPaciente telaPaciente = new MainPaciente();
+                MainPaciente telaPaciente = new MainPaciente(null);
                           telaPaciente.setVisible(true);
                 dispose();
             } else if (campoUsuario.getText().equals("medico")&&campoSenha.getText().equals("1234")) {
-                MainMedico telaMed = new MainMedico();
+                MainMedico telaMed = new MainMedico(null);
                           telaMed.setVisible(true);
                 dispose();
-        }
+            }
         }
     }//GEN-LAST:event_campoSenhaKeyPressed
 

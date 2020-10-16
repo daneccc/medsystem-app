@@ -5,11 +5,8 @@ import model.Medico;
 
 public class MedicoControl {
     static ArrayList<Medico> listaMedicos = new ArrayList();
-    static int id=0;
     
     public static void CadastrarMedico(Medico p){
-        id++;
-        p.setId(id);
         listaMedicos.add(p);
     }
     
@@ -48,10 +45,18 @@ public class MedicoControl {
         }    
         return null;
     }
+    
+    public static Medico PesquisarUsuarioMedico(String usuario, String senha){
+        for(Medico m : listaMedicos){
+            if (m.getUsername().equals(usuario) && m.getPassword().equals(senha)) {
+                return m;
+            }
+        }    
+        return null;
+    }
  
     public static void DeletarMedico(Medico m){
         listaMedicos.remove(m);
-        id--;
     }
     
     public static ArrayList<Medico> ListarMedicos(){

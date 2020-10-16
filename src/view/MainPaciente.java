@@ -5,6 +5,10 @@
  */
 package view;
 
+import controller.PacienteLogado;
+import model.Paciente;
+
+
 /**
  *
  * @author danie
@@ -14,7 +18,7 @@ public class MainPaciente extends javax.swing.JFrame {
     /**
      * Creates new form MainPaciente2
      */
-    public MainPaciente() {
+    public MainPaciente(Paciente p) {
         initComponents();
     }
 
@@ -142,6 +146,7 @@ public class MainPaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        PacienteLogado.Deslogar();
         TelaLogin telaLogin = new TelaLogin();
         telaLogin.setVisible(true);
         dispose();
@@ -178,7 +183,7 @@ public class MainPaciente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainPaciente().setVisible(true);
+                new MainPaciente(null).setVisible(true);
             }
         });
     }

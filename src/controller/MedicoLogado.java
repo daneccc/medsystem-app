@@ -34,4 +34,8 @@ public class MedicoLogado {
         }
         return false;
     }
+    
+    public static void Deslogar() {
+        listaMedicos.remove(0);
+    }
 }

@@ -5,6 +5,8 @@
  */
 package view;
 
+import controller.MedicoLogado;
+import model.Medico;
 import view.*;
 
 /**
@@ -16,7 +18,7 @@ public class MainMedico extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
-    public MainMedico() {
+    public MainMedico(Medico m) {
         initComponents();
     }
 
@@ -149,6 +151,7 @@ public class MainMedico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MedicoLogado.Deslogar();
         TelaLogin telaLogin = new TelaLogin();
         telaLogin.setVisible(true);
         dispose();
@@ -185,7 +188,7 @@ public class MainMedico extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMedico().setVisible(true);
+                new MainMedico(null).setVisible(true);
             }
         });
     }

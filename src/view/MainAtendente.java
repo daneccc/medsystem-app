@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.AtendenteLogado;
 import controller.ConsultaControl;
 import model.Consulta;
 import view.consulta.EditarConsulta;
@@ -209,6 +210,7 @@ public class MainAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        AtendenteLogado.Deslogar();
         TelaLogin telaLogin = new TelaLogin();
         telaLogin.setVisible(true);
         dispose();

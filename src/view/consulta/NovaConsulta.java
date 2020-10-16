@@ -203,6 +203,24 @@ public class NovaConsulta extends javax.swing.JFrame {
             erros++;
         }
         
+        c.setId(Integer.parseInt(idConsultaTextField.getText()));
+        if(c.getId() == 0) {
+            campo_erro.add("- id da consulta\n");
+            erros++;
+        }
+        
+        int aux = 0;
+        if(ConsultaControl.ConsultaExiste(c.getId())) {
+            JOptionPane.showMessageDialog(this, "O 'id da consulta' passado já existe!");
+            aux = 1;
+            erros++;
+        }
+        
+        if(ConsultaControl.ConsultaExiste(c.getId())) {
+            JOptionPane.showMessageDialog(this, "O 'id da consulta' passado já existe!");
+            erros++;
+        }
+        
         String hora = jFormattedTextField1.getText();
         c.setHora(hora);
         if(c.getHora().charAt(0) == ' ') {
@@ -211,17 +229,22 @@ public class NovaConsulta extends javax.swing.JFrame {
         }
         
         if(erros > 0) {
-            String aux = msg_erro;
-            String mensagem = "";
-            for(int i=0; i < campo_erro.size(); i++) {
-                mensagem = aux.concat(campo_erro.get(i));
-                aux = mensagem;
+            if(aux == 1) {
+                JOptionPane.showMessageDialog(this, "O 'id da consulta' passado já existe!");
             }
-            JOptionPane.showMessageDialog(this, mensagem);
+            if(aux == 0 || (aux == 1 && erros > 1)) {
+                String aux1 = msg_erro;
+                String mensagem = "";
+                for(int i=0; i < campo_erro.size(); i++) {
+                    mensagem = aux1.concat(campo_erro.get(i));
+                    aux1 = mensagem;
+                }
+                JOptionPane.showMessageDialog(this, mensagem);
+            }
         }
         
         else {
-            ConsultaControl.CadastrarConsulta(c); // atenção aqui
+            ConsultaControl.CadastrarConsulta(c);
             JOptionPane.showMessageDialog(this, "Consulta cadastrada com sucesso");
             dispose();
         }

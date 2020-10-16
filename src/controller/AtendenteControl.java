@@ -4,11 +4,8 @@ import model.Atendente;
 
 public class AtendenteControl {
     static ArrayList<Atendente> listaAtendentees = new ArrayList();
-    static int id=0;
     
     public static void CadastrarAtendente(Atendente p){
-        id++;
-        p.setId(id);
         listaAtendentees.add(p);
     }
     
@@ -37,9 +34,16 @@ public class AtendenteControl {
         return null;
     }
     
+    public static Atendente PesquisarUsuarioAtendente(String usuario, String senha){
+        for(Atendente p : listaAtendentees){
+            if (p.getUsername().equals(usuario) && p.getPassword().equals(senha))
+                return p;
+        }
+        return null;
+    }
+    
     public static void DeletarAtendente(Atendente a){
         listaAtendentees.remove(a);
-        id--;
     }
     
     public static ArrayList<Atendente> ListarAtendentes(){

@@ -34,4 +34,8 @@ public class AtendenteLogado {
         }
         return false;
     }
+    
+    public static void Deslogar() {
+        listaAtendentes.remove(0);
+    }
 }

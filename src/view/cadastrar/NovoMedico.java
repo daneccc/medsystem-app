@@ -457,9 +457,15 @@ public class NovoMedico extends javax.swing.JFrame {
         
         m.setNasc(jFormattedTextFieldNascimento.getText());
         
+        m.setPassword(jPasswordField1.getText());
+        if(m.getPassword().equals("")) {
+            campo_erro.add("- Senha\n");
+            erros++;
+        }
+        
         m.setContato(jFormattedTextFieldContato.getText());
         if(m.getContato().charAt(1) == ' ') {
-            campo_erro.add("- Contato\n");
+            campo_erro.add("- Contato");
             erros++;
         }
         
@@ -475,6 +481,8 @@ public class NovoMedico extends javax.swing.JFrame {
         
         // se nenhum campo obrigatório deixou de ser preenchido, exibe a mensagem de sucesso 
         else {
+            String usuario = jFormattedTextFieldCPF.getText().replace(".", "").replace("-", "");
+            m.setUsername(usuario);
             MedicoControl.CadastrarMedico(m);
             JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso");
             dispose();

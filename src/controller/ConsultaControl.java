@@ -9,11 +9,8 @@ import model.TipoAtendimento;
 
 public class ConsultaControl {
     static ArrayList<Consulta> listaConsultas = new ArrayList();
-    static int id=0;
     
     public static void CadastrarConsulta(Consulta p){
-        id++;
-        p.setId(id);
         listaConsultas.add(p);
     }    
     
@@ -41,10 +38,17 @@ public class ConsultaControl {
         }
         return null;
     }
+    
+    public static boolean ConsultaExiste(int id){
+        for(Consulta c : listaConsultas){
+            if (c.getId() == id)
+                return true;
+        }
+        return false;
+    }
  
     public static void DeletarConsulta(Consulta c){
         listaConsultas.remove(c);
-        id--;
     }
     
     public static ArrayList<Consulta> ListarConsultas(){

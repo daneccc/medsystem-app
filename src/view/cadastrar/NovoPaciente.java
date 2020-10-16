@@ -321,9 +321,15 @@ public class NovoPaciente extends javax.swing.JFrame {
         
         p.setData_nasc(jFormattedTextFieldNascimento.getText());
         
+        p.setPassword(jPasswordField1.getText());
+        if(p.getPassword().equals("")) {
+            campo_erro.add("- Senha\n");
+            erros++;
+        }
+        
         p.setTelefone(jFormattedTextFieldContato.getText());
         if(p.getTelefone().charAt(1) == ' ') {
-            campo_erro.add("- Contato\n");
+            campo_erro.add("- Contato");
             erros++;
         }
         if(erros > 0) {
@@ -338,6 +344,8 @@ public class NovoPaciente extends javax.swing.JFrame {
         
         // se nenhum campo obrigatório deixou de ser preenchido, exibe a mensagem de sucesso 
         else {
+            String usuario = jFormattedTextFieldCPF.getText().replace(".", "").replace("-", "");
+            p.setUsername(usuario);
             PacienteControl.CadastrarPaciente(p);
             JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso");
             dispose();

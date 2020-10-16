@@ -327,6 +327,12 @@ public class NovoAtendente extends javax.swing.JFrame {
         
         a.setNasc(jFormattedTextFieldNascimento.getText());
         
+        a.setPassword(jPasswordField1.getText());
+        if(a.getPassword().equals("")) {
+            campo_erro.add("- Senha\n");
+            erros++;
+        }
+        
         a.setContato(jFormattedTextFieldContato.getText());
         if(a.getContato().charAt(1) == ' ') {
             campo_erro.add("- Contato");
@@ -344,6 +350,8 @@ public class NovoAtendente extends javax.swing.JFrame {
         }
         
         else {
+            String usuario = jFormattedTextFieldCPF.getText().replace(".", "").replace("-", "");
+            a.setUsername(usuario);
             AtendenteControl.CadastrarAtendente(a);
             JOptionPane.showMessageDialog(this, "Atendente cadastrado com sucesso");
             dispose();

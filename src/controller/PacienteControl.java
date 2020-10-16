@@ -4,11 +4,8 @@ import model.Paciente;
 
 public class PacienteControl {
     static ArrayList<Paciente> listaPacientes = new ArrayList();
-    static int id;
     
     public static void CadastrarPaciente(Paciente p){
-        id++;
-        p.setId(id);
         listaPacientes.add(p);
     }
     
@@ -36,6 +33,14 @@ public class PacienteControl {
         return null;
     }
     
+    public static Paciente PesquisarUsuarioPaciente(String usuario, String senha){
+        for(Paciente p : listaPacientes){
+            if (p.getUsername().equals(usuario) && p.getPassword().equals(senha))
+                return p;
+        }
+        return null;
+    }
+    
     public static Paciente PesquisarPacienteNome(String nome){
         for(Paciente p : listaPacientes){
             if (p.getNome().equals(nome)) {
@@ -47,7 +52,6 @@ public class PacienteControl {
  
     public static void DeletarPaciente(Paciente p){
         listaPacientes.remove(p);
-        id--;
     }
     
     public static ArrayList<Paciente> ListarPacientes(){
