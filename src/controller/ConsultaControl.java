@@ -38,6 +38,14 @@ public class ConsultaControl {
         }
         return null;
     }
+
+    public static Consulta PesquisarConsulta(int id){
+        for(Consulta c : listaConsultas){
+            if (c.getId() == id)
+                return c;
+        }
+        return null;
+    }
     
     public static boolean ConsultaExiste(int id){
         for(Consulta c : listaConsultas){
@@ -53,5 +61,48 @@ public class ConsultaControl {
     
     public static ArrayList<Consulta> ListarConsultas(){
         return listaConsultas;
+    }
+    
+    public static ArrayList<Consulta> ListarConsultas(Medico m){
+        ArrayList<Consulta> consultaArray = new ArrayList();
+        for(Consulta c: listaConsultas){
+            if(c.getMedico() == m){
+                consultaArray.add(c);
+            }
+        }
+        
+        return consultaArray;
+    }
+
+    public static ArrayList<Consulta> ListarConsultas(Paciente p){
+        ArrayList<Consulta> consultaArray = new ArrayList();
+        for(Consulta c: listaConsultas){
+            if(c.getPaciente() == p){
+                consultaArray.add(c);
+            }
+        }
+        
+        return consultaArray;
+    }
+
+    public static ArrayList<Consulta> ListarConsultas(String data){
+        ArrayList<Consulta> consultaArray = new ArrayList();
+        for(Consulta c: listaConsultas){
+            if(c.getData().equals(data)){
+                consultaArray.add(c);
+            }
+        }
+        
+        return consultaArray;
+    }
+    
+    public static int RetornaIdNovo(){
+        int id = 0;
+        for(Consulta c: listaConsultas){
+            if(c.getId() > id)
+                id = c.getId();
+        }
+        
+        return id + 1;
     }
 }

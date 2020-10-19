@@ -371,7 +371,7 @@ public class EditarAtendente extends javax.swing.JFrame {
 
         if(resposta == 0){
             AtendenteControl.DeletarAtendente(a);
-            JOptionPane.showMessageDialog(this, "Médico deletado com sucesso."); 
+            JOptionPane.showMessageDialog(this, "Atendente deletado com sucesso."); 
             this.setVisible(false);
             this.dispose();
         }

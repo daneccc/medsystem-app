@@ -5,8 +5,12 @@
  */
 package view;
 
+import controller.ConsultaControl;
 import controller.MedicoLogado;
+import javax.swing.table.DefaultTableModel;
+import model.Consulta;
 import model.Medico;
+import model.Paciente;
 import view.*;
 
 /**
@@ -20,8 +24,49 @@ public class MainMedico extends javax.swing.JFrame {
      */
     public MainMedico(Medico m) {
         initComponents();
+        createTable(m);
     }
+    
+    /*public void createTable(){        
+        DefaultTableModel dm = (DefaultTableModel) consultasCadastradas.getModel();
+        int rowCount = dm.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            dm.removeRow(i);
+        }
+        
+        for(Consulta c: ConsultaControl.ListarConsultas()){
+            Paciente p = c.getPaciente();
+            Medico m = c.getMedico();
+            String data = c.getData();
+            String hora = c.getHora();
+            
+            String[] row = {data, hora, p.getNome(), m.getNome()};
+            
+            dm.addRow(row);
+        }
+    }*/
 
+    public void createTable(Medico med){        
+        DefaultTableModel dm = (DefaultTableModel) consultasCadastradas.getModel();
+        int rowCount = dm.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            dm.removeRow(i);
+        }
+        
+        for(Consulta c: ConsultaControl.ListarConsultas(med)){
+            Paciente p = c.getPaciente();
+            Medico m = c.getMedico();
+            String data = c.getData();
+            String hora = c.getHora();
+            String id = String.valueOf(c.getId());
+            
+            String[] row = {data, hora, p.getNome(), m.getNome(), id};
+            
+            dm.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,35 +95,50 @@ public class MainMedico extends javax.swing.JFrame {
 
         consultasCadastradas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Data", "Horário", "Paciente", "Médico"
+                "Data", "Horário", "Paciente", "Médico", "ID"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         consultasCadastradas.setIntercellSpacing(new java.awt.Dimension(3, 3));
         consultasCadastradas.setMaximumSize(new java.awt.Dimension(2147483647, 120));
         consultasCadastradas.setMinimumSize(new java.awt.Dimension(60, 120));

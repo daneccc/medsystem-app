@@ -5,7 +5,11 @@
  */
 package view;
 
+import controller.ConsultaControl;
 import controller.PacienteLogado;
+import javax.swing.table.DefaultTableModel;
+import model.Consulta;
+import model.Medico;
 import model.Paciente;
 
 
@@ -20,8 +24,29 @@ public class MainPaciente extends javax.swing.JFrame {
      */
     public MainPaciente(Paciente p) {
         initComponents();
+        createTable(p);
     }
-
+    
+    public void createTable(Paciente pac){        
+        DefaultTableModel dm = (DefaultTableModel) jTable1.getModel();
+        int rowCount = dm.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            dm.removeRow(i);
+        }
+        
+        for(Consulta c: ConsultaControl.ListarConsultas(pac)){
+            Paciente p = c.getPaciente();
+            Medico m = c.getMedico();
+            String data = c.getData();
+            String hora = c.getHora();
+            String id = String.valueOf(c.getId());
+            
+            String[] row = {data, hora, m.getNome(), id};
+            
+            dm.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,15 +74,30 @@ public class MainPaciente extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Data", "Hora", "Médico", "Observação", "Status"
+                "Data", "Hora", "Médico", "ID"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.setIntercellSpacing(new java.awt.Dimension(3, 3));
         jTable1.setMaximumSize(new java.awt.Dimension(2147483647, 120));
         jTable1.setMinimumSize(new java.awt.Dimension(60, 120));

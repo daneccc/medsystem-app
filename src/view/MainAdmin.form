@@ -73,9 +73,11 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel1" min="-2" pref="208" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jTextField1" min="-2" pref="188" max="-2" attributes="0"/>
+                          <Component id="jButton1" min="-2" pref="110" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                          <Component id="jTextFieldEscolha" min="-2" pref="188" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jComboBox1" min="-2" pref="88" max="-2" attributes="0"/>
+                          <Component id="jComboBoxFiltro" min="-2" pref="88" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -87,19 +89,20 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="68" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField1" max="32767" attributes="0"/>
-                              <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jTextFieldEscolha" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jButton1" alignment="3" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="jComboBoxFiltro" alignment="0" max="32767" attributes="0"/>
                               <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <Component id="jLabel1" min="-2" pref="68" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -236,11 +239,11 @@
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="4">
-                    <Column editable="true" title="Data" type="java.lang.Object"/>
-                    <Column editable="true" title="Hora" type="java.lang.Object"/>
-                    <Column editable="true" title="Paciente" type="java.lang.Object"/>
-                    <Column editable="true" title="M&#xe9;dico" type="java.lang.Object"/>
-                    <Column editable="true" title="C&#xf3;digo" type="java.lang.Object"/>
+                    <Column editable="false" title="Data" type="java.lang.String"/>
+                    <Column editable="false" title="Hora" type="java.lang.String"/>
+                    <Column editable="false" title="Paciente" type="java.lang.String"/>
+                    <Column editable="false" title="M&#xe9;dico" type="java.lang.String"/>
+                    <Column editable="false" title="C&#xf3;digo" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="intercellSpacing" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -296,7 +299,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarAtendenteActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="jComboBoxFiltro">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
@@ -307,7 +310,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxFiltroActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -321,7 +324,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="jTextFieldEscolha">
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>
@@ -336,6 +339,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Atualizar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
