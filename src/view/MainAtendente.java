@@ -10,6 +10,8 @@ import controller.ConsultaControl;
 import controller.MedicoControl;
 import controller.PacienteControl;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Consulta;
 import model.Medico;
@@ -72,7 +74,7 @@ public class MainAtendente extends javax.swing.JFrame {
         }
     }
     
-    public void createTable(String dat){        
+    public void createTable(String dat){  
         DefaultTableModel dm = (DefaultTableModel) jTable2.getModel();
         int rowCount = dm.getRowCount();
         //Remove rows one by one from the end of the table
@@ -93,7 +95,7 @@ public class MainAtendente extends javax.swing.JFrame {
         }
     }
 
-    public void createTable(Paciente pac){        
+    public void createTable(Paciente pac){
         DefaultTableModel dm = (DefaultTableModel) jTable2.getModel();
         int rowCount = dm.getRowCount();
         //Remove rows one by one from the end of the table

@@ -427,7 +427,7 @@ public class MainAdmin extends javax.swing.JFrame {
 
     private void btnEditarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarConsultaActionPerformed
         int id = Integer.parseInt(campoBuscarConsulta.getText());
-        
+ 
         Consulta c = ConsultaControl.PesquisarConsulta(id);
         if(c == null){
             JOptionPane.showMessageDialog(null, "Não foi encontrado a consulta de ID " + id);
