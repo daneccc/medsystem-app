@@ -1,4 +1,5 @@
 #MedSystem App
+
 Aplicativo desktop para o gerenciamento de uma clínica médica. A seguir, é apresentado as principais funcionalidades do sistema:
 - Gerenciamento de consultas
 - Gerenciamento de pacientes, médicos e atendentes
