@@ -216,18 +216,20 @@ public class NovaConsulta extends javax.swing.JFrame {
         ArrayList<String> campo_erro = new ArrayList<>();
         String msg_erro = "O(s) seguinte(s) campo(s) precisa(m) ser preenchido(s):\n";
         
-        String nomePaciente = jComboBoxPaciente.getSelectedItem().toString();
-        c.setPaciente(PacienteControl.PesquisarPacienteNome(nomePaciente));
-        if(c.getPaciente().getNome().equals("<Selecione>")) {
+        String nomePaciente = (String) jComboBoxPaciente.getSelectedItem();
+        if(nomePaciente.equals("<Selecione>")) {
             campo_erro.add("- Paciente\n");
             erros++;
+        } else {
+            c.setPaciente(PacienteControl.PesquisarPacienteNome(nomePaciente));
         }
         
-        String nomeMedico = jComboBoxMedico.getSelectedItem().toString();
-        c.setMedico(MedicoControl.PesquisarMedicoNome(nomeMedico));
-        if(c.getMedico().getNome().equals("<Selecione>")) {
+        String nomeMedico = (String) jComboBoxMedico.getSelectedItem();
+        if(nomeMedico.equals("<Selecione>")) {
             campo_erro.add("- Médico\n");
             erros++;
+        } else {
+            c.setMedico(MedicoControl.PesquisarMedicoNome(nomeMedico));
         }
         
         String data = jFormattedTextField2.getText();
@@ -246,13 +248,7 @@ public class NovaConsulta extends javax.swing.JFrame {
         
         int aux = 0;
         if(ConsultaControl.ConsultaExiste(c.getId())) {
-            JOptionPane.showMessageDialog(this, "O 'id da consulta' passado já existe!");
             aux = 1;
-            erros++;
-        }
-        
-        if(ConsultaControl.ConsultaExiste(c.getId())) {
-            JOptionPane.showMessageDialog(this, "O 'id da consulta' passado já existe!");
             erros++;
         }
         

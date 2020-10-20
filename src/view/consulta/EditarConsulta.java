@@ -239,17 +239,17 @@ public class EditarConsulta extends javax.swing.JFrame {
         ArrayList<String> campo_erro = new ArrayList<>();
         String msg_erro = "O(s) seguinte(s) campo(s) precisa(m) ser preenchido(s):\n";
             
-        String paciente = jComboBoxPaciente.getSelectedItem().toString();
-        if(paciente.equals("")) {
+        String nomePaciente = (String) jComboBoxPaciente.getSelectedItem();
+        if(nomePaciente.equals("<Selecione>")) {
             campo_erro.add("- Paciente\n");
             erros++;
         }
             
-        String medico = jComboBoxMedico.getSelectedItem().toString();
-        if(medico.equals("")) {
+        String nomeMedico = (String) jComboBoxMedico.getSelectedItem();
+        if(nomeMedico.equals("<Selecione>")) {
             campo_erro.add("- Médico\n");
             erros++;
-        }
+        } 
             
         if(data.charAt(0) == ' ') {
             campo_erro.add("- Data\n");
@@ -273,8 +273,8 @@ public class EditarConsulta extends javax.swing.JFrame {
         }
             
         else {
-            Medico m = MedicoControl.PesquisarMedicoNome(medico);
-            Paciente p = PacienteControl.PesquisarPacienteNome(paciente);
+            Medico m = MedicoControl.PesquisarMedicoNome(nomeMedico);
+            Paciente p = PacienteControl.PesquisarPacienteNome(nomePaciente);
                 
             ConsultaControl.AlterarConsulta(c.getId(), p, m, data, hora, c.getAtendente(), c.getStatus(), c.getTipoAtendimento());
             JOptionPane.showMessageDialog(this, "Consulta editada com sucesso");

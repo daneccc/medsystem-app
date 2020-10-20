@@ -319,16 +319,26 @@ public class MainAtendente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarConsultaActionPerformed
-        int id = Integer.parseInt(campoBuscarConsulta.getText());
+        String aux_id = campoBuscarConsulta.getText();
+        if(aux_id.length() > 0 ) {
+            int id1 = (int) aux_id.charAt(0);
+            if((id1 <= 47 || id1 >= 58)) {
+                JOptionPane.showMessageDialog(null, "Somente números são válidos");
+                return;
+            } else {
+                int id  = Integer.parseInt(aux_id);
+                Consulta c = ConsultaControl.PesquisarConsulta(id);
+                if(c == null){
+                    JOptionPane.showMessageDialog(null, "Não foi encontrado a consulta de ID " + id);
+                    return;
+                }
         
-        Consulta c = ConsultaControl.PesquisarConsulta(id);
-        if(c == null){
-            JOptionPane.showMessageDialog(null, "Não foi encontrado a consulta de ID " + id);
-            return;
+                EditarConsulta editarConsulta = new EditarConsulta(c);
+                editarConsulta.setVisible(true);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Somente números são válidos");
         }
-        
-        EditarConsulta editarConsulta = new EditarConsulta(c);
-        editarConsulta.setVisible(true);
     }//GEN-LAST:event_btnEditarConsultaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
