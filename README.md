@@ -9,7 +9,8 @@ Aplicativo desktop para o gerenciamento de uma clínica médica. A seguir, é ap
 - IDE Netbeans
 - Sistema desenvolvido em Java com Swing
 
-## Funcionalidades e telas
+## Como executar, funcionalidades e telas
+- Execute o JAR localizado na pasta "dist"
 - Login: para a autenticação, como administrador, utilize os seguintes dados na tela de login:
 > Login: <strong>admin</strong>;
 > Senha: <strong>1234</strong>;
