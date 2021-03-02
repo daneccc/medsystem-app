@@ -2,18 +2,29 @@ package controller;
 import java.util.ArrayList;
 import model.Administrador;
 
-public class AdministradorControl {
+
+
+
+
+public class AdmControl {
     static ArrayList<Administrador> listaAdministradores = new ArrayList();
+    
     static int id=0;
     
-    static void CadastrarAdministrador(Administrador p){
+    //cadastra adm
+    static void CadastrarAdm(Administrador p){
         id++;
         p.setId(id);
         listaAdministradores.add(p);
     }
     
-    static boolean AlterarAdministrador(int id, String nome, String cpf, String rg, String contato,
+
+    //altera adm
+    static boolean AlterarAdm(int id, String nome, String cpf, String rg, String contato,
             String nasc, String endereco, String sexo){
+        
+        
+        
         for(Administrador m : listaAdministradores){
             if(m.getId() == id){
                 m.setNome(nome);
@@ -29,7 +40,8 @@ public class AdministradorControl {
         return false;
     }
 
-    static Administrador PesquisarAdministrador(String nome){
+    //pesquisa adm
+    static Administrador PesquisarAdm(String nome){
         for(Administrador a : listaAdministradores){
             if (a.getNome().equals(nome))
                 return a;
@@ -37,12 +49,16 @@ public class AdministradorControl {
         return null;
     }
  
-    static void DeletarAdministrador(Administrador a){
+    //deleta um administrador
+    static void DeletarAdm(Administrador a){
         listaAdministradores.remove(a);
         id--;
     }
+  
     
-    static ArrayList<Administrador> ListarAdministradors(){
+
+
+    static ArrayList<Administrador> ListarAdm(){
         return listaAdministradores;
     }
 }
